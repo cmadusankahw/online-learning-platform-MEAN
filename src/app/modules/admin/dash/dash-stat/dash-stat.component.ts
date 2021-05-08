@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DashStat } from 'src/app/modules/scraper/scraper.model';
-import { ScraperService } from 'src/app/modules/scraper/scraper.service';
+import { DashStat } from 'src/app/modules/student/student.model';
+import { ScraperService } from 'src/app/modules/student/scraper.service';
 
 
 @Component({

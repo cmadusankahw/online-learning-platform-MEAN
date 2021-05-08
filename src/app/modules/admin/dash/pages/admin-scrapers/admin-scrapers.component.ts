@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Scraper } from 'src/app/modules/scraper/scraper.model';
-import { ScraperService } from 'src/app/modules/scraper/scraper.service';
+import { Scraper } from 'src/app/modules/student/student.model';
+import { ScraperService } from 'src/app/modules/student/scraper.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';

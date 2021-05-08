@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Scraper } from '../../scraper/scraper.model';
-import { ScraperService } from '../../scraper/scraper.service';
+import { Scraper } from '../../student/student.model';
+import { ScraperService } from '../../student/scraper.service';
 
 @Component({
   selector: 'app-admin-add-scraper',

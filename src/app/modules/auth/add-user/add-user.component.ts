@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
-import { User } from '../../scraper/scraper.model';
+import { User } from '../../student/student.model';
 import { AuthService } from '../auth.service';
 import { MatDialog } from '@angular/material';
 import { ErrorComponent } from 'src/app/error/error.component';

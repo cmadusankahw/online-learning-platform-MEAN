@@ -6,8 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
-import { Scraper, User } from '../../scraper/scraper.model';
-import { ScraperService } from '../../scraper/scraper.service';
+import { Scraper, User } from '../../student/student.model';
+import { ScraperService } from '../../student/scraper.service';
 
 @Component({
   selector: 'app-all-users',

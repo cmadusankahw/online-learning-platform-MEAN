@@ -3,8 +3,8 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Scraper } from '../../scraper/scraper.model';
-import { ScraperService } from '../../scraper/scraper.service';
+import { Scraper } from '../../student/student.model';
+import { ScraperService } from '../../student/scraper.service';
 
 
 @Component({

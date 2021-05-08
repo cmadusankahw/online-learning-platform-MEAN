@@ -1,0 +1,81 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'side' : 'over'"
+    [opened]="(isHandset$ | async) === true"
+  >
+    <!--profile pic-->
+    <div class="pd-img">
+      <img
+        [src]="topIcon"
+        alt="headerDetails Pic"
+        class="img-thumbnail"
+      />
+    </div>
+
+    <mat-nav-list>
+      <a
+        class="txt-white row"
+        mat-list-item
+        [ngClass]="home"
+        (click)="navHome()"
+        routerLink="/student"
+      >
+        <div class="col-md-11 side-start">
+          <mat-icon>policy</mat-icon>
+          <span class="side-text"> ඇතුළත්වූ පාඨමාලා </span>
+        </div>
+        <div class="ol-md-1 side-end">
+          <mat-icon>arrow_right</mat-icon>
+        </div>
+      </a>
+
+
+
+      <a
+        class="txt-white row"
+        mat-list-item
+        [ngClass]="settings"
+        (click)="navSettings()"
+        routerLink="/student/settings"
+      >
+        <div class="col-md-11 side-start">
+          <mat-icon>perm_identity</mat-icon>
+          <span class="side-text"> ගිණුම් සැකසීම්  </span>
+        </div>
+        <div class="ol-md-1 side-end">
+          <mat-icon>arrow_right</mat-icon>
+        </div>
+      </a>
+
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!--dashboard content-->
+  <mat-sidenav-content>
+    <mat-toolbar color="bg-primary" style="color:ornage;">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <b>
+          සියලු විස්තර
+        </b>
+
+      </button>
+    </mat-toolbar>
+
+    <!--dashboard content-->
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+    <!--end dashboard content-->
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -22,13 +22,13 @@
           (click) ="onLogin = !onLogin"
         >
           <mdb-icon fas icon="sign-in-alt"></mdb-icon>
-          Sign In
+          ගිණුමට ඇතුලු වන්න
         </a>
       </li>
       <li class="nav-item" *ngIf= "!onRegister">
         <a mdbWavesEffect class="nav-link txt-bold"  routerLink="/signup" (click) ="onRegister = !onRegister" >
           <mdb-icon fas icon="user-plus"></mdb-icon>
-          Create New Account
+          නව ගිණුමක් සාදා ගන්න
         </a>
       </li>
     </ul>
@@ -42,7 +42,7 @@
 <mdb-navbar
   SideClass="navbar navbar-expand-lg sticky-top navbar-light white scrolling-navbar"
   [containerInside]="false"
-  *ngIf="userIsAuthenticated  && headerDetails.userType != 'admin'"
+  *ngIf="userIsAuthenticated  && headerDetails.userType == 'teacher'"
 >
   <!-- Navbar brand -->
   <mdb-navbar-brand
@@ -86,7 +86,7 @@
           <a
             class="dropdown-item waves-light mx-wd"
             mdbWavesEffect
-            routerLink="/scraper"
+            routerLink="/teacher"
           >
             <mdb-icon fas icon="tachometer-alt"></mdb-icon>
             &emsp; &emsp; Run Scrapers</a
@@ -94,7 +94,7 @@
           <a
             class="dropdown-item waves-light mx-wd"
             mdbWavesEffect
-            routerLink="/scraper/data"
+            routerLink="/teacher/students"
           >
             <mdb-icon fas icon="tasks"></mdb-icon>
             &emsp; &emsp; Generated Data</a
@@ -103,10 +103,10 @@
           <a
             class="dropdown-item waves-light mx-wd"
             mdbWavesEffect
-            routerLink="/scraper/settings"
+            routerLink="/teacher/settings"
           >
             <mdb-icon fas icon="user-friends"></mdb-icon>
-            &emsp; &emsp; My Profile</a
+            &emsp; &emsp; ගිණුම් සැකසීම් </a
           >
           <hr />
           <a
@@ -116,7 +116,7 @@
             routerLink="/"
           >
             <mdb-icon fas icon="sign-out-alt"></mdb-icon>
-            &emsp; &emsp; Sign out</a
+            &emsp; &emsp; ඉවත් වන්න  </a
           >
         </div>
       </li>
@@ -133,7 +133,7 @@
 <mdb-navbar
   SideClass="navbar navbar-expand-lg sticky-top navbar-light white scrolling-navbar"
   [containerInside]="false"
-  *ngIf="userIsAuthenticated && headerDetails.userType == 'admin'"
+  *ngIf="userIsAuthenticated && headerDetails.userType == 'student'"
 >
   <!-- Navbar brand -->
   <mdb-navbar-brand
@@ -147,13 +147,7 @@
       <li class="nav-item">
         <a mdbWavesEffect class="nav-link" target="_blank" href="#">
           <mdb-icon fas icon="book"></mdb-icon>
-          Doumentation
-        </a>
-      </li>
-      <li class="nav-item">
-        <a mdbWavesEffect class="nav-link" routerLink="/support">
-          <mdb-icon fas icon="question-circle"></mdb-icon>
-          Support requests
+          අමතර උපකාර
         </a>
       </li>
     </ul>
@@ -183,36 +177,19 @@
           <a
             class="dropdown-item waves-light mx-wd"
             mdbWavesEffect
-            routerLink="/admin"
+            routerLink="/student"
           >
             <mdb-icon fas icon="tachometer-alt"></mdb-icon>
-            &emsp; &emsp; Dashboard</a
+            &emsp; &emsp; පාඨමාලා ලැයිස්තුව </a
           >
-          <a
-            class="dropdown-item waves-light mx-wd"
-            mdbWavesEffect
-            routerLink="/admin/scrapers"
-          >
-            <mdb-icon fas icon="tasks"></mdb-icon>
-            &emsp; &emsp; Manage Scrapers</a
-          >
-
-          <a
-          class="dropdown-item waves-light mx-wd"
-          mdbWavesEffect
-          routerLink="/admin/users"
-        >
-          <mdb-icon fas icon="user-friends"></mdb-icon>
-          &emsp; &emsp; Manage Userse</a
-        >
 
           <a
             class="dropdown-item waves-light mx-wd"
             mdbWavesEffect
-            routerLink="/admin/settings"
+            routerLink="/student/settings"
           >
             <mdb-icon fas icon="user-friends"></mdb-icon>
-            &emsp; &emsp; My Profile</a
+            &emsp; &emsp; ගිණුම් සැකසීම් </a
           >
           <hr />
           <a
@@ -222,7 +199,7 @@
             routerLink="/"
           >
             <mdb-icon fas icon="sign-out-alt"></mdb-icon>
-            &emsp; &emsp; Sign out</a
+            &emsp; &emsp; ඉවත් වන්න  </a
           >
         </div>
       </li>

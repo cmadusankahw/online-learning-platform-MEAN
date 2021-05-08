@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
 import { MatDialog, MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material';
-import { ScraperRun, User, UserScraper } from '../scraper/scraper.model';
-import { getUser, getHeader, getLastId, postSignIn, url, getUsers, deleteUser, getAuthUser, postSignUp, postUploadImage, putUpdateUser, deleteScraperRun, putUpdateSelectedUser } from '../scraper/scraper.config';
+import { ScraperRun, User, UserScraper } from '../student/student.model';
+import { getUser, getHeader, getLastId, postSignIn, url, getUsers, deleteUser, getAuthUser, postSignUp, postUploadImage, putUpdateUser, deleteScraperRun, putUpdateSelectedUser } from '../student/scraper.config';
 import { LogIn } from './auth.model';
 import { SuccessComponent } from 'src/app/success/success.component';
 
