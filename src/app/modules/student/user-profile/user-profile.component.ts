@@ -7,7 +7,7 @@ import { Router} from '@angular/router';
 
 import { ErrorComponent } from 'src/app/error/error.component';
 import { DatePipe } from '@angular/common';
-import { User } from '../student.model';
+import { Student } from '../student.model';
 import { AuthService } from '../../auth/auth.service';
 
 
@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   editmode = false;
 
   // bprofile data binding
-  user: User;
+  student: Student;
 
 
    // image to upload
@@ -38,11 +38,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
               private router: Router) { }
 
   ngOnInit() {
-    this.authService.getAuthUser();
-    this.userSubs = this.authService.getCurrentUserUpdatteListener().subscribe (
+    this.authService.getAuthStudent();
+    this.userSubs = this.authService.getCurrentStudentUpdatedListener().subscribe (
       user => {
         if (user) {
-          this.user = user;
+          this.student = user;
         }
       }, (error) => {
         console.log(error);
@@ -72,21 +72,23 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     if (editForm.invalid) {
       console.log('Form Invalid');
     } else {
-      const user: User = {
-        userId: this.user.userId,
-        userType:this.user.userType,
-        userName: editForm.value.user_name,
-        profilePic: this.user.profilePic,
-        userEmail: editForm.value.email,
-        userContactNo: editForm.value.contact_no,
-        status: this.user.status,
-        scrapers: this.user.scrapers
+      const user: Student = {
+        studentId: this.student.studentId,
+        studentName: editForm.value.user_name,
+        profilePic: this.student.profilePic,
+        email: editForm.value.email,
+        contactNo: editForm.value.contact_no,
+        gender: editForm.value.gender,
+        location: editForm.value.location,
+        class: this.student.class,
+        stream:this.student.stream,
+        subjects:this.student.subjects,
         };
-      this.authService.updateUser(user, this.image);
-      this.userSubs = this.authService.getUserUpdatteListener()
+      this.authService.updateStudent(user, this.image);
+      this.userSubs = this.authService.getStudentUpdatteListener()
       .subscribe((res) => {
-        this.user = res;
-        console.log('User details updated successfully!');
+        this.student = res;
+        console.log('Student details updated successfully!');
       });
       editForm.resetForm();
       this.editmode = false;

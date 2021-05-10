@@ -11,9 +11,8 @@ const url = "/learn-online/v1/"
 
 //import app segments
 const auth = require ('./controller/auth/auth');
-// const scraper_run = require ('./controller/scraper/scraper-run');
 
-mongoose.connect('mongodb+srv://admin:adminWS123@cluster0.69yxf.mongodb.net/scraper?retryWrites=true&w=majority', // mongodb+srv://:${process.env.DB_PASS}@cluster0.xnfvc.gcp.mongodb.net/evenza?retryWrites=true&w=majority    mongodb://localhost:27017/evenza
+mongoose.connect('mongodb+srv://<un>:<pw>@cluster0.69yxf.mongodb.net/<db>?retryWrites=true&w=majority',
   { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to monogodb database..');

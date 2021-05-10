@@ -1,6 +1,6 @@
 //model imports
 const AuthUser = require("../../model/auth/authUser.model");
-const User = require("../../model/auth/user.model");
+const Student = require("../../model/auth/student.model");
 const checkAuth = require("../../middleware/auth-check");
 
 //dependency imports
@@ -59,16 +59,7 @@ auth.post('/signup', (req, res, next) => {
     console.log(authUser); // test
     authUser.save()
       .then( () => {
-        const user = new User ({
-          userId: req.body.user.userId,
-          userName: req.body.user.userName,
-          userType: req.body.user.userType,
-          profilePic: req.body.user.profilePic,
-          userEmail: req.body.user.userEmail,
-          userContactNo: req.body.user.userContactNo,
-          status: req.body.user.status,
-          scrapers: req.body.user.scrapers
-        });
+        const user = new Student (req.body.user);
         user.save()
         .then(() => {
           res.status(200).json({
@@ -79,7 +70,7 @@ auth.post('/signup', (req, res, next) => {
         .catch( err => {
           console.log(err);
           res.status(500).json({
-            message: 'User signup was not successfull! Please try again!'
+            message: 'Your signup was not successfull! Please try again!'
           });
         });
     });
@@ -154,7 +145,7 @@ auth.post('/signin', (req, res, next) => {
 
 
 // add profile pic for user
-auth.post('/user/image',checkAuth, multer({storage:storage}).array("images[]"), (req, res, next) => {
+auth.post('/student/image',checkAuth, multer({storage:storage}).array("images[]"), (req, res, next) => {
   const url = req.protocol + '://' + req.get("host");
   imagePath = url+ "/images/user/" +  req.files[0].filename;
   res.status(200).json({
@@ -164,15 +155,17 @@ auth.post('/user/image',checkAuth, multer({storage:storage}).array("images[]"), 
 
 
 //update user
-auth.post('/user/one',checkAuth, (req, res, next) => {
-  User.updateOne({ userId: req.userData.user_id}, {
-    userName: req.body.userName,
-    userType: req.body.userType,
+auth.post('/student/one',checkAuth, (req, res, next) => {
+  Student.updateOne({ studentId: req.userData.user_id}, {
+    studentName: req.body.studentName,
     profilePic: req.body.profilePic,
-    userEmail: req.body.userEmail,
-    userContactno: req.body.userContactno,
-    status: req.body.status,
-    scrapers: req.body.scrapers
+    email: req.body.email,
+    contactno: req.body.contactno,
+    gender: req.body.gender,
+    location: req.body.location,
+    class: req.body.class,
+    stream: req.body.stream,
+    subjects: req.body.subjects
   })
   .then((result) => {
     console.log(result);
@@ -189,20 +182,20 @@ auth.post('/user/one',checkAuth, (req, res, next) => {
 });
 
 //update user
-auth.post('/user/selected',checkAuth, (req, res, next) => {
-  User.updateOne({ userId: req.body.userId}, {
-    scrapers: req.body.scrapers
+auth.post('/student/selected',checkAuth, (req, res, next) => {
+  Student.updateOne({ studentId: req.body.studentId}, {
+    // code here
   })
   .then((result) => {
     console.log(result);
     res.status(200).json({
-      message: 'user scrapers updated successfully!',
+      message: 'details updated successfully!',
     });
   })
   .catch(err=>{
     console.log(err);
     res.status(500).json({
-      message: 'user scrapers update failed! Please Try Again!'
+      message: 'details update failed! Please Try Again!'
     });
   });
 });
@@ -210,18 +203,18 @@ auth.post('/user/selected',checkAuth, (req, res, next) => {
 
 
 // get auth user
-auth.get('/user/current',checkAuth, (req, res, next) => {
-  User.findOne({ userId: req.userData.user_id}, function (err,user) {
+auth.get('/student/current',checkAuth, (req, res, next) => {
+  Student.findOne({ studentId: req.userData.user_id}, function (err,user) {
     if (err) return handleError(err => {
       console.log(err);
       res.status(500).json(
         {
-          message: 'Couldn\'t recieve User Details! Please retry'
+          message: 'Couldn\'t recieve Student Details! Please retry'
         });
     });
     res.status(200).json(
       {
-        message: 'User recieved successfully!',
+        message: 'Student recieved successfully!',
         user: user
       }
     );
@@ -230,19 +223,19 @@ auth.get('/user/current',checkAuth, (req, res, next) => {
 
 // for ADMIN
 // get all users except current user(admin)
-auth.get('/user/all',checkAuth, (req, res, next) => {
+auth.get('/student/all',checkAuth, (req, res, next) => {
 
-  User.find({userId: {$ne: req.userData.user_id}}, function (err,users) {
+  Student.find({studentId: {$ne: req.userData.user_id}}, function (err,users) {
     if (err) return handleError(err => {
       console.log(err);
       res.status(500).json(
         {
-          message: 'Couldn\'t recieve User Details! Please retry'
+          message: 'Couldn\'t recieve student Details! Please retry'
         });
     });
     res.status(200).json(
       {
-        message: 'User recieved successfully!',
+        message: 'student recieved successfully!',
         users: users
       }
     );
@@ -252,16 +245,16 @@ auth.get('/user/all',checkAuth, (req, res, next) => {
 
 
 // delete a user
-auth.delete('/user/one/:id',checkAuth, (req, res, next) => {
+auth.delete('/student/one/:id',checkAuth, (req, res, next) => {
 
-  var removeUserQuery =  User.deleteOne({userId: req.params.id});
+  var removeUserQuery =  Student.deleteOne({studentId: req.params.id});
   var removeAuthUserQuery = AuthUser.delete({user_id: req.params.id});
 
   removeUserQuery.exec().then( () => {
     removeAuthUserQuery.exec().then( () => {
         res.status(200).json(
           {
-            message: 'User removed successfully!',
+            message: 'Student removed successfully!',
           }
         );
     })
@@ -269,7 +262,7 @@ auth.delete('/user/one/:id',checkAuth, (req, res, next) => {
     console.log(err);
     res.status(500).json(
       {
-        message: 'Couldn\'t remove User! Please retry!'
+        message: 'Couldn\'t remove Student! Please retry!'
       });
   });
 });

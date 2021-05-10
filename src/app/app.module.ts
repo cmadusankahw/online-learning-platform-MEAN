@@ -48,7 +48,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { UserProfileComponent } from './modules/student/user-profile/user-profile.component';
-import { ContactUsComponent } from './modules/home/contact-us/contact-us.component';
 import { NotFoundPageComponent } from './modules/home/not-found-page/not-found-page.component';
 import { AuthInterceptor } from './modules/auth/auth-interceptor';
 import { ErrorInterceptor } from './error-interceptor';
@@ -57,19 +56,18 @@ import { SuccessComponent } from './success/success.component';
 import { DashboardComponent } from './modules/student/dash/dashboard/dashboard.component';
 import { DashHomeComponent } from './modules/student/dash/pages/dash-home/dash-home.component';
 import { DashDataComponent } from './modules/student/dash/pages/dash-data/dash-data.component';
-import { AllUsersComponent } from './modules/admin/all-users/all-users.component';
+import { AllUsersComponent } from './modules/teacher/all-users/all-users.component';
 import { DashSettingsComponent } from './modules/student/dash/pages/dash-settings/dash-settings.component';
 import { CreateNewPasswordComponent } from './modules/auth/create-new-password/create-new-password.component';
 import { PasswordResetComponent } from './modules/auth/password-reset/password-reset.component';
 import { HomepageComponent } from './modules/home/homepage/homepage.component';
-import { AdminDashStatComponent } from './modules/admin/dash/dash-stat/dash-stat.component';
-import { AdminDashboardComponent } from './modules/admin/dash/dashboard/admin-dashboard.component';
-import { AdminHomeComponent } from './modules/admin/dash/pages/admin-home/admin-home.component';
-import { AdminScrapersComponent } from './modules/admin/dash/pages/admin-scrapers/admin-scrapers.component';
-import { AdminSettingsComponent } from './modules/admin/dash/pages/admin-settings/admin-settings.component';
-import { AdminUsersComponent } from './modules/admin/dash/pages/admin-users/admin-users.component';
-import { AdminAddScraperComponent } from './modules/admin/admin-add-scraper/admin-add-scraper.component';
-import { AdminScraperDetailsComponent } from './modules/admin/admin-scraper-details/admin-scraper-details.component';
+import { TeacherDashboardComponent } from './modules/teacher/dash/dashboard/teacher-dashboard.component';
+import { TeacherHomeComponent } from './modules/teacher/dash/pages/teacher-home/teacher-home.component';
+import { TeacherSettingsComponent } from './modules/teacher/dash/pages/teacher-settings/teacher-settings.component';
+import { TeacherUsersComponent } from './modules/teacher/dash/pages/teacher-users/teacher-users.component';
+import { TeacherCoursesComponent } from './modules/teacher/dash/pages/teacher-courses/teacher-courses.component';
+import { TeacherAddCourseComponent } from './modules/teacher/teacher-add-course/teacher-add-course.component';
+import { TeacherAddVideosComponent } from './modules/teacher/teacher-add-videos/teacher-add-videos.component';
 
 
 @NgModule({
@@ -80,7 +78,6 @@ import { AdminScraperDetailsComponent } from './modules/admin/admin-scraper-deta
     FooterComponent,
     AddUserComponent,
     UserProfileComponent,
-    ContactUsComponent,
     NotFoundPageComponent,
     ErrorComponent,
     SuccessComponent,
@@ -92,14 +89,13 @@ import { AdminScraperDetailsComponent } from './modules/admin/admin-scraper-deta
     DashDataComponent,
     AllUsersComponent,
     DashSettingsComponent,
-    AdminDashStatComponent,
-    AdminDashboardComponent,
-    AdminHomeComponent,
-    AdminScrapersComponent,
-    AdminSettingsComponent,
-    AdminUsersComponent,
-    AdminAddScraperComponent,
-    AdminScraperDetailsComponent
+    TeacherHomeComponent,
+    TeacherDashboardComponent,
+    TeacherSettingsComponent,
+    TeacherUsersComponent,
+    TeacherCoursesComponent,
+    TeacherAddCourseComponent,
+    TeacherAddVideosComponent,
   ],
   imports: [
     BrowserModule,
