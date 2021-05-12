@@ -1,0 +1,30 @@
+.example-card {
+  max-width: 350px;
+  margin:10px;
+}
+
+.example-header-image {
+  background-image: url('https://www.pngitem.com/pimgs/m/157-1576340_game-based-learning-png-transparent-cartoons-game-based.png');
+  background-size: cover;
+}
+
+mat-card-content{
+  font-size:18px;
+  font-weight:bold;
+  color:rgb(148, 100, 10);
+  padding-top:15px;
+}
+
+.buttons{
+  text-align: center;
+  display:flex;
+  align-content: center;
+
+}
+
+.card-box{
+  display: flex;
+  align-items: space-around;
+  text-align:center;
+
+}

@@ -34,9 +34,9 @@
             required
             ngModel
           />
-          <label for="form8">Email</label>
+          <label for="form8">ගිණුම් අංකය හෝ විද්‍යුත් තැපැල් ලිපිනය</label>
           <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)"
-            >Email Invalid</mdb-error
+            >ගිණුම් අංකය හෝ විද්‍යුත් තැපැල් ලිපිනය අවශ්‍යයි </mdb-error
           >
         </div>
 
@@ -55,9 +55,9 @@
           />
           <mdb-error
             *ngIf="password.invalid && (password.dirty || password.touched)"
-            >Enter Your Password</mdb-error
+            >මුරපදය ඇතුලු කරන්න </mdb-error
           >
-          <label for="materialLoginFormPassword">Password</label>
+          <label for="materialLoginFormPassword">මුරපදය </label>
         </div>
 
         <br>
@@ -66,11 +66,11 @@
         <div class="d-flex text-center justify-content-around">
           <div>
             <!-- Remember me -->
-            <mdb-checkbox>Remember me</mdb-checkbox>
+            <mdb-checkbox>පුරනය මතක තබා ගන්න </mdb-checkbox>
           </div>
           <div>
             <!-- Forgot password -->
-            <a routerLink="/resetpw" style="color:orange; font-weight:bold;">Change Password ?</a>
+            <a routerLink="/resetpw" style="color:orange; font-weight:bold;">මුරපදය වෙනස් කිරීමට  ?</a>
           </div>
         </div>
 
@@ -85,7 +85,7 @@
           mdbWavesEffect
           type="submit"
         >
-          Log in
+        ඇතුලුවන්න
         </button>
 
           <br>

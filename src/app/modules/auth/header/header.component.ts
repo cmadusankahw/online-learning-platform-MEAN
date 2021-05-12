@@ -27,7 +27,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   headerDetails: {userType: string, userName: string, profilePic: string};
 
 
-
   ngOnInit() {
 
     this.authService.getHeaderDetails();

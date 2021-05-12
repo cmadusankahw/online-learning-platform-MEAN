@@ -4,30 +4,27 @@ import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
 import { MatDialog, MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material';
-import { ScraperRun, User, UserScraper } from '../scraper/scraper.model';
-import { getUser, getHeader, getLastId, postSignIn, url, getUsers, deleteUser, getAuthUser, postSignUp, postUploadImage, putUpdateUser, deleteScraperRun, putUpdateSelectedUser } from '../scraper/scraper.config';
+import { Student } from '../student/student.model';
+import { getHeader, getLastId, postSignIn, url, postSignUp, postUploadImage, getStudent, getAuthStudent, getStudents, putUpdateStudent, putUpdateSelectedStudent, deleteStudent, getClassStudents } from '../student/student.config';
 import { LogIn } from './auth.model';
 import { SuccessComponent } from 'src/app/success/success.component';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
   private lastIdUpdated = new Subject<string>();
-  private userUpdated = new Subject<User>();
-  private currentUserUpdated = new Subject<User>();
-  private usersUpdated = new Subject<User[]>();
+  private studentUpdated = new Subject<Student>();
+  private classStudentsUpdated = new Subject<Student[]>();
+  private currentStudentUpdated = new Subject<Student>();
+  private studentsUpdated = new Subject<Student[]>();
   private authStatusListener = new Subject<boolean>();
   private headerDetailsListener = new Subject<{userType: string, userName: string, profilePic: string}>();
-  private userScrapersUpdated = new Subject<UserScraper[]>();
-
-  // current users scrapers and runs
-  private userScrapers: UserScraper[];
 
   // user logged in
-  private currentUser: User;
+  private currentStudent: Student;
 
   // all users
-  private users: User[];
-  private user: User;
+  private students: Student[];
+  private student: Student;
 
   // last signed user id
   private lastId: string;
@@ -56,29 +53,36 @@ export class AuthService {
 
   // GET
 
-    getUser(userId) {
-      this.http.get<{user: User}>(url + getUser + userId)
+    getStudent(userId) {
+      this.http.get<{user: Student}>(url + getStudent + userId)
         .subscribe((res) => {
-          this.user = res.user;
-          this.userUpdated.next(this.user);
+          this.student = res.user;
+          this.studentUpdated.next(this.student);
       });
     }
 
-    getAuthUser() {
-      this.http.get<{user: User}>(url + getAuthUser )
+    getAuthStudent() {
+      this.http.get<{user: Student}>(url + getAuthStudent )
       .subscribe((res) => {
-        this.currentUser = res.user;
-        this.userScrapers = res.user.scrapers
-        this.currentUserUpdated.next(this.currentUser);
+        this.currentStudent = res.user;
+        this.currentStudentUpdated.next(this.currentStudent);
     });
     }
 
-    getUsers() {
-      this.http.get<{users: User[]}>(url + getUsers)
+    getStudents() {
+      this.http.get<{users: Student[]}>(url + getStudents)
         .subscribe((res) => {
-          this.usersUpdated.next(res.users);
+          this.studentsUpdated.next(res.users);
       });
     }
+
+    getClassStudents(classId) {
+      this.http.get<{users: Student[]}>(url + getClassStudents + classId )
+        .subscribe((res) => {
+          this.studentsUpdated.next(res.users);
+      });
+    }
+
 
   // get details for header
   getHeaderDetails() {
@@ -94,12 +98,6 @@ export class AuthService {
     }
   }
 
-  // get user type in signup-select
-  getUserType() {
-    if (this.user) {
-      return this.user.userType;
-    }
-  }
 
    // get last product id
   getLastUserId() {
@@ -135,27 +133,27 @@ export class AuthService {
     return this.headerDetailsListener.asObservable();
   }
 
-  getUsersUpdateListener() {
-    return this.usersUpdated.asObservable();
+  getStudentsUpdateListener() {
+    return this.studentsUpdated.asObservable();
   }
 
-  getUserUpdatteListener() {
-    return this.userUpdated.asObservable();
+  getStudentUpdatteListener() {
+    return this.studentUpdated.asObservable();
   }
 
-  getCurrentUserUpdatteListener() {
-    return this.currentUserUpdated.asObservable();
+  getCurrentStudentUpdatedListener() {
+    return this.currentStudentUpdated.asObservable();
   }
 
-  getUserScrapersUpdateListener() {
-    return this.userScrapersUpdated.asObservable();
+  getClassStudentsUpdatedListener() {
+    return this.classStudentsUpdated.asObservable();
   }
 
 
 
 // POST , PUT
 
-  signUp(user: User, password: string) {
+  signUp(user: Student, password: string) {
       this.http.post<{message: string}>(url + postSignUp , {user, password})
      .subscribe((recievedData) => {
        console.log(recievedData.message);
@@ -173,7 +171,7 @@ export class AuthService {
  }
 
 // update user profile
- updateUser(user: User, image: File) {
+ updateStudent(user: Student, image: File) {
   if (image) {
     const newImage = new FormData();
     newImage.append('images[]', image, image.name);
@@ -182,28 +180,28 @@ export class AuthService {
     .subscribe ((recievedImage) => {
     console.log(recievedImage);
     user.profilePic = recievedImage.profile_pic;
-    this.http.post<{message: string}>(url + putUpdateUser, user)
+    this.http.post<{message: string}>(url + putUpdateStudent, user)
     .subscribe((recievedData) => {
       console.log(recievedData.message);
-      this.currentUser = user;
-      this.currentUserUpdated.next(this.currentUser);
+      this.currentStudent = user;
+      this.currentStudentUpdated.next(this.currentStudent);
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate(['/scraper/settings']);
+      this.router.navigate(['/student/settings']);
       this.dialog.open(SuccessComponent, {data: {message: 'Your Profile Details Updated Successfully!'}});
     }, (error) => {
       console.log(error);
       });
     });
   } else {
-    this.http.post<{message: string}>(url + putUpdateUser , user)
+    this.http.post<{message: string}>(url + putUpdateStudent , user)
     .subscribe((recievedData) => {
       console.log(recievedData.message);
-      this.currentUser = user;
-      this.currentUserUpdated.next(this.currentUser);
+      this.currentStudent = user;
+      this.currentStudentUpdated.next(this.currentStudent);
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate(['/scraper/settings']);
+      this.router.navigate(['/student/settings']);
       this.dialog.open(SuccessComponent, {data: {message: 'Your Profile Details Updated Successfully!'}});
     }, (error) => {
       console.log(error);
@@ -212,15 +210,15 @@ export class AuthService {
 }
 
 // update selected user
-updateSlectedUser(user: User) {
-  this.http.post<{message: string}>(url + putUpdateSelectedUser , user)
+updateSlectedStudent(user: Student) {
+  this.http.post<{message: string}>(url + putUpdateSelectedStudent , user)
   .subscribe((recievedData) => {
     console.log(recievedData.message);
-    this.userUpdated.next(user);
+    this.studentUpdated.next(user);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/admin/users']);
-    this._snackBar.open('User\'s scrapers details updated!', 'Dismiss', {
+    this.router.navigate(['/teacher/users']);
+    this._snackBar.open('User\'s details updated!', 'Dismiss', {
       duration: 2500,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
@@ -239,13 +237,13 @@ updateSlectedUser(user: User) {
 
 // DELETE
 
-removeUser(userId){
-    this.http.delete<{ message: string }>(url + deleteUser + userId)
+removeStudent(userId){
+    this.http.delete<{ message: string }>(url + deleteStudent + userId)
       .subscribe((recievedData) => {
-        if (this.users.length) {
-          const updatedUsers = this.users.filter(usr => usr.userId !== userId);
-          this.users = updatedUsers;
-          this.usersUpdated.next(this.users);
+        if (this.students.length) {
+          const updatedUsers = this.students.filter(usr => usr.studentId !== userId);
+          this.students = updatedUsers;
+          this.studentsUpdated.next(this.students);
           this._snackBar.open(recievedData.message , 'Dismiss', {
             duration: 2500,
             horizontalPosition: this.horizontalPosition,
@@ -256,30 +254,6 @@ removeUser(userId){
           console.log(error);
           });
 }
-
-
-  removeScraperRun(scraperId, scraperRunId){
-    this.http.delete<{ message: string, userScrapers: UserScraper[] }>(url + deleteScraperRun + scraperId + "/" + scraperRunId)
-    .subscribe((recievedData) => {
-      if (recievedData) {
-        console.log(recievedData.message);
-        if (this.userScrapers.length) {
-          this.userScrapers = recievedData.userScrapers;
-          this.userScrapersUpdated.next(this.userScrapers);
-        }
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['/scraper/data']);
-        this._snackBar.open('Your Scraper Run entry:' + scraperRunId + ' removed!', 'Dismiss', {
-          duration: 2500,
-          horizontalPosition: this.horizontalPosition,
-          verticalPosition: this.verticalPosition,
-          });
-      }
-      }, (error) => {
-        console.log(error);
-        });
-  }
 
 
   // log in user
@@ -303,11 +277,7 @@ removeUser(userId){
         const now = new Date();
         const expirationDate = new Date (now.getTime() + recievedData.expiersIn * 1000 );
         this.saveAuthData(recievedData.token, expirationDate );
-        if (recievedData.user_type == 'admin') {
-          this.router.navigate(['/admin']);
-        } else {
-          this.router.navigate(['/scraper']);
-        }
+          this.router.navigate(['/student']);
       }
    }, (error) => {
      console.log(error);
