@@ -19,7 +19,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   private lastIdSub: Subscription;
 
-  lastId : string;
+  lastId: string;
 
   constructor(private router: Router,
               public datepipe: DatePipe,
@@ -35,7 +35,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
            console.log( this.lastId);
          }
     });
-    this.router.events.subscribe((evt) => {
+     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
           return;
       }
@@ -50,7 +50,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
   }
 
   confirmPassword(str1, str2){
-    if (str1 == str2) {
+    if (str1 === str2) {
       return true;
     } else {
       return false;
@@ -65,13 +65,14 @@ export class AddUserComponent implements OnInit, OnDestroy {
         const user: Student = {
           studentId: this.lastId,
           studentName: signupForm.value.user_name,
+          user_type:'Student',
           profilePic: './assets/images/scraper/user.png',
           email: signupForm.value.user_email,
           contactNo: signupForm.value.contact_no,
           gender:  signupForm.value.gender,
           location:  signupForm.value.location,
           class:  signupForm.value.al_class,
-          stream:  "",
+          stream:  'any', // get from form if required
           subjects:[]
           };
         this.authService.signUp(user, signupForm.value.user_pass);

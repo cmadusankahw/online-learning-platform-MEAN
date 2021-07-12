@@ -10,13 +10,13 @@ import { Course, Student } from '../../../student.model';
 })
 export class DashHomeComponent implements OnInit, OnDestroy {
 
-  courses: Course[] =[
+  courses: Course[] = [
     {
       courseId: 'C1',
       courseName: 'Chemistry',
       class: 2023,
-      thumbnail:'./assets/images/classes/chemistry2023/1.jpg',
-      teacher: 'Prasanna Baddewithana',
+      thumbnail: './assets/images/classes/chemistry2023/1.jpg',
+      teacher: 'Anushka Idunil',
       videoLinks: [{
         title: 'රසායනික ගණිතය ',
         link: '',
@@ -30,7 +30,7 @@ export class DashHomeComponent implements OnInit, OnDestroy {
       courseId: 'C1',
       courseName: 'Chemistry',
       class: 2023,
-      thumbnail:'./assets/images/classes/chemistry2023/2.jpg',
+      thumbnail: './assets/images/classes/chemistry2023/2.jpg',
       teacher: 'Prasanna Baddewithana',
       videoLinks: [{
         title: 'රසායනික ගණිතය ',
@@ -45,7 +45,7 @@ export class DashHomeComponent implements OnInit, OnDestroy {
       courseId: 'C1',
       courseName: 'Physics',
       class: 2023,
-      thumbnail:'./assets/images/classes/chemistry2023/3.jpg',
+      thumbnail: './assets/images/classes/chemistry2023/3.jpg',
       teacher: 'Prasanna Baddewithana',
       videoLinks: [{
         title: 'රසායනික ගණිතය ',
@@ -56,9 +56,9 @@ export class DashHomeComponent implements OnInit, OnDestroy {
       commence: '2021-04-05',
       expire: '2023-08-05'
     }
-  ]
+  ];
 
-  studentName = "අසංක ඉදුනිල් "
+  studentName = 'අසංක ඉදුනිල් ';
 
 
   private userSub: Subscription;

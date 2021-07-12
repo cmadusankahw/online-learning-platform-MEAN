@@ -1,94 +1,97 @@
-
 <div *ngIf="course">
-<div class="top-content">
-  <div class="mt-3 mb-2 text-center">
-    <h2><strong> පාඨමාලාව : {{course.courseName + ' ' + course.class}}</strong></h2>
-  </div>
-  <hr>
-</div>
-<div class="bottom-content row">
+    <div class="top-content">
+        <div class="mt-3 mb-2 text-center">
+            <h2><strong> පාඨමාලාව : {{course.courseName + ' ' + course.class}}</strong></h2>
+        </div>
+        <hr>
+    </div>
+    <div class="bottom-content row">
 
-  <div class="col-md-4 course-list">
+        <div class="col-md-4 course-list">
 
-    <div *ngFor="let video of course.videoLinks">
-    <mat-card class=" now-playing example-card" *ngIf="now_playing_id == video.title" >
-      <mat-card-content >
-        <div class="row">
-          <div class="col-md-3 text-center">
-            <img mat-card-image src="./assets/images/scraper/video_icon.png"  alt="Video">
-          </div>
-          <div class="col-md-8">
-            <h4>{{video.title}}</h4>
-            <p>
-              <b>ඉගැන්වීම : </b> {{course.teacher}}
-            </p>
-            <div class="play-icon pause">
-              <mdb-icon fas icon="pause"></mdb-icon>
-             <span style="font-size:16px;">
+            <div *ngFor="let video of course.videoLinks">
+                <mat-card class=" now-playing example-card" *ngIf="now_playing_id == video.title">
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <img mat-card-image src="./assets/images/scraper/video_icon.png" alt="Video">
+                            </div>
+                            <div class="col-md-8">
+                                <h4>{{video.title}}</h4>
+                                <p>
+                                    <b>ඉගැන්වීම : </b> {{course.teacher}}
+                                </p>
+                                <div class="play-icon pause">
+                                    <mdb-icon fas icon="pause"></mdb-icon>
+                                    <span style="font-size:16px;">
               නවත්වන්න
              </span>
-            </div>
-            <br>
-          </div>
-        </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
 
-      </mat-card-content>
+                    </mat-card-content>
 
-    </mat-card>
-    <mat-card class="example-card" *ngIf="now_playing_id != video.title" >
-      <mat-card-content >
-        <div class="row">
-          <div class="col-md-3 text-center">
-            <img mat-card-image src="./assets/images/scraper/video_icon.png"  alt="Video">
-          </div>
-          <div class="col-md-8">
-            <h4>{{video.title}}</h4>
-            <p>
-              <b>ඉගැන්වීම : </b> {{course.teacher}}
-            </p>
-            <div class="play-icon">
-              <mdb-icon fas icon="play"></mdb-icon>
-             <span style="font-size:16px;">
+                </mat-card>
+                <mat-card class="example-card" *ngIf="now_playing_id != video.title">
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <img mat-card-image src="./assets/images/scraper/video_icon.png" alt="Video">
+                            </div>
+                            <div class="col-md-8">
+                                <h4>{{video.title}}</h4>
+                                <p>
+                                    <b>ඉගැන්වීම : </b> {{course.teacher}}
+                                </p>
+                                <div class="play-icon">
+                                    <mdb-icon fas icon="play"></mdb-icon>
+                                    <span style="font-size:16px;">
               නරඹන්න
              </span>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+
+                    </mat-card-content>
+
+                </mat-card>
             </div>
-            <br>
-          </div>
+
         </div>
 
-      </mat-card-content>
+        <div class="col-md-8 video-player">
 
-    </mat-card>
-  </div>
-
-  </div>
-
-  <div class="col-md-8 video-player">
-
-    <div class="player-content">
-      <div class="video">
-        <video width="100%" controls (click)="toggleVideo()" #videoPlayer>
+            <div class="player-content">
+                <div class="video">
+                    <!--
+                    <video width="100%" controls (click)="toggleVideo()" #videoPlayer>
             <source src="{{course.videoLinks[0].link}}" type="video/mp4" />
             Browser not supported
-        </video>
+        </video>-->
+                    <div style="position: relative; padding-top: 56.25%;"><iframe src="https://iframe.mediadelivery.net/embed/4858/1c56b1e1-8988-4f58-bea5-cee79c571b88?autoplay=true" loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                            allowfullscreen="true"></iframe></div>
+                </div>
+            </div>
+
+            <div class="other-details mb-5 ml-3 mr-5">
+                <div class="next-prev">
+                    <button mat-button color="warn">< Previous</button>
+                    <p style=" font-size:38px; color:orange;"> | </p> <button mat-button color="warn">Next > </button>
+                </div>
+                <h4><strong> ගුරුවරයාගේ සටහන් </strong></h4>
+                <hr>
+                <p>{{course.videoLinks[0].comments}}</p>
+            </div>
+
         </div>
+
     </div>
-
-    <div class="other-details mb-5 ml-3 mr-5">
-      <div class="next-prev">
-        <button mat-button color="warn">< Previous</button><p style=" font-size:38px; color:orange;"> | </p> <button mat-button color="warn">Next > </button>
-      </div>
-        <h4><strong> ගුරුවරයාගේ සටහන් </strong></h4>
-        <hr>
-        <p>{{course.videoLinks[0].comments}}</p>
-    </div>
-
-  </div>
-
-</div>
 </div>
 
 
 <div *ngIf="!course" class="mt-5 pt-5 mb-5 text-center">
-  <h2><b>පාථමාලාව තවමත් විවෘතව නැත</b></h2>
+    <h2><b>පාථමාලාව තවමත් විවෘතව නැත</b></h2>
 </div>

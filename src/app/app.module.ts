@@ -68,6 +68,7 @@ import { TeacherUsersComponent } from './modules/teacher/dash/pages/teacher-user
 import { TeacherCoursesComponent } from './modules/teacher/dash/pages/teacher-courses/teacher-courses.component';
 import { TeacherAddCourseComponent } from './modules/teacher/teacher-add-course/teacher-add-course.component';
 import { TeacherAddVideosComponent } from './modules/teacher/teacher-add-videos/teacher-add-videos.component';
+import { NewcoursesComponent } from './modules/auth/newcourses/newcourses.component';
 
 
 @NgModule({
@@ -96,6 +97,7 @@ import { TeacherAddVideosComponent } from './modules/teacher/teacher-add-videos/
     TeacherCoursesComponent,
     TeacherAddCourseComponent,
     TeacherAddVideosComponent,
+    NewcoursesComponent,
   ],
   imports: [
     BrowserModule,
