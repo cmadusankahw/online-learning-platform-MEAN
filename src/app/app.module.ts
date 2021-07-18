@@ -69,7 +69,7 @@ import { TeacherCoursesComponent } from './modules/teacher/dash/pages/teacher-co
 import { TeacherAddCourseComponent } from './modules/teacher/teacher-add-course/teacher-add-course.component';
 import { TeacherAddVideosComponent } from './modules/teacher/teacher-add-videos/teacher-add-videos.component';
 import { NewcoursesComponent } from './modules/auth/newcourses/newcourses.component';
-
+import { NoRightClickDirective } from './no-right-click.directive';
 
 @NgModule({
   declarations: [
@@ -98,6 +98,7 @@ import { NewcoursesComponent } from './modules/auth/newcourses/newcourses.compon
     TeacherAddCourseComponent,
     TeacherAddVideosComponent,
     NewcoursesComponent,
+    NoRightClickDirective,
   ],
   imports: [
     BrowserModule,
