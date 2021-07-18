@@ -4,8 +4,8 @@
     class="sidenav"
     fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'side' : 'over'"
-    [opened]="(isHandset$ | async) === true"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
   >
     <!--profile pic-->
     <div class="pd-img">
