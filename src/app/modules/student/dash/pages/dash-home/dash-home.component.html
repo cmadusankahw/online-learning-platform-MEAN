@@ -4,7 +4,6 @@
 
     </div>
     <hr>
-<<<<<<< HEAD
     <div class="mt-5 mb-3 row text-center" *ngIf="courses.length">
       <mat-card class="example-card" *ngFor="let course of courses">
         <mat-card-header>
@@ -29,24 +28,6 @@
             mdbWavesEffect
             routerLink="course/{{course.courseId}}"
           >
-=======
-    <div class="mt-5 mb-3 card-box" *ngIf="cour.length">
-        <mat-card class="example-card" *ngFor="let course of cour">
-            <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{course.courseName + ' ' + course.class}}</mat-card-title>
-            </mat-card-header>
-            <br>
-            <img mat-card-image [src]="course.thumbnail" height="200" alt="Photo of a course">
-            <mat-card-content>
-                <p>
-                    <b>ඉගැන්වීම : </b> {{course.teacher[0].teacherName}}
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <div class="buttons">
-                    <button mdbBtn color="orange" rounded="true" block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect routerLink="course/{{course.courseId}}">
->>>>>>> 7d7ca41c1cc26bfae2d921d40bae91112214fff9
           ඇතුලුවන්න
           </button>
                 </div>
