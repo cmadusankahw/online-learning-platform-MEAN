@@ -10,7 +10,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DashHomeComponent implements OnInit, OnDestroy {
 
-
+  checkstatuss = 'active';
+  studentid = 'U1';
+  teacherid = '123';
+makepayemnt = 'No';
   courses: Course[] = [
     {
       courseId: 'C1',
@@ -82,6 +85,10 @@ export class DashHomeComponent implements OnInit, OnDestroy {
     //  console.log(error);
     // });
     this.getcourse();
+
+    this.checkstatus().then(res =>  this.getcourse());
+
+    
   }
 
   ngOnDestroy() {
@@ -91,8 +98,11 @@ export class DashHomeComponent implements OnInit, OnDestroy {
   }
 
   getcourse() {
-    const details = {teacherid: '123', class: '2023' };
-    this.http
+  
+    if (this.checkstatuss !== 'deactive') {
+      console.log('here');
+      const details = {teacherid: '123', class: '2023' };
+      this.http
     .post< any >('http://localhost:3000/learn-online/v1/course/getcourse', details)
     .subscribe(responseData => {
       console.log(responseData);
@@ -100,12 +110,30 @@ export class DashHomeComponent implements OnInit, OnDestroy {
       const newda = datas.message;
       this.cour = newda ;
       console.log(this.cour);
-      alert(newda);
+    
 
     });
 
-
+  } else {
+    this.makepayemnt = 'Yes';
+  }
     }
 
-
+    checkstatus() {
+      return new Promise<void>((resolve, reject) => {
+      const details = {teacherid: this.teacherid, studentid: this.studentid  };
+      this.http
+      .post< any >('http://localhost:3000/learn-online/v1/teacher/chekstatus', details)
+      .subscribe(responseData => {
+        console.log(responseData);
+        const datas = responseData;
+        const newda = datas.message[0].status;
+       
+        console.log(newda);
+        this.checkstatuss = newda;
+    
+      });
+      resolve();
+    });
+    }
 }
