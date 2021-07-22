@@ -6,11 +6,10 @@ import { Router } from '@angular/router';
 import { MatDialog, MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material';
 import { Student } from '../student/student.model';
 import { getHeader, getLastId, postSignIn, url, postSignUp, postUploadImage, getStudent, getAuthStudent, getStudents, putUpdateStudent, putUpdateSelectedStudent, deleteStudent, getClassStudents } from '../student/student.config';
-import { LogIn } from './auth.model';
 import { SuccessComponent } from 'src/app/success/success.component';
 
 @Injectable({providedIn: 'root'})
-export class AuthService {
+export class TeacherService {
   private lastIdUpdated = new Subject<string>();
   private studentUpdated = new Subject<Student>();
   private classStudentsUpdated = new Subject<Student[]>();
@@ -255,95 +254,5 @@ removeStudent(userId){
           });
 }
 
-
-  // log in user
-  signIn(login: LogIn) {
-    this.http.post<{ message: string,
-                     token: any,
-                     expiersIn: number,
-                     user_type: string }>(url + postSignIn , login)
-    .subscribe((recievedData) => {
-      console.log(recievedData.message);
-
-      this.setAuthTimer(recievedData.expiersIn);
-
-      this.token = recievedData.token;
-      console.log(this.token);
-      this.getHeaderDetails();
-
-      if (recievedData.token) {
-        this.isAuthenticated = true;
-        this.authStatusListener.next(true);
-        const now = new Date();
-        const expirationDate = new Date (now.getTime() + recievedData.expiersIn * 1000 );
-        this.saveAuthData(recievedData.token, expirationDate );
-          this.router.navigate(['/student']);
-      }
-   }, (error) => {
-     console.log(error);
-   });
- }
-
-   // auto auth user after restart
-   autoAuthUser() {
-    const authInformation = this.getAuthData();
-    if (!authInformation) {
-      return;
-    }
-    const now = new Date();
-    const expiersIn = authInformation.expiarationDate.getTime() - now.getTime();
-    if (expiersIn > 0) {
-      this.token = authInformation.token;
-      this.isAuthenticated = true;
-      this.setAuthTimer(expiersIn / 1000); // node timers works in secords (not ms)
-      this.authStatusListener.next(true);
-    }
-  }
-
-
- // log out user
- signOut() {
-   this.token = null;
-   this.isAuthenticated = false;
-   this.authStatusListener.next(false);
-   this.clearAuthData();
-   clearTimeout(this.tokenTimer);
- }
-
-
- // starts the session timer
- private setAuthTimer(duration: number) {
-   console.log ('Setting timer to : ' + duration);
-   this.tokenTimer = setTimeout(() => {
-    this.signOut();
-    alert('Session Time Out! You have been logged out! Please log in back..');
-    this.router.navigate(['/']);
-   }, duration * 1000);
- }
-
- // store token and user data in local storage
- private saveAuthData(token: string, expiarationDate: Date) {
-   localStorage.setItem('token', token);
-   localStorage.setItem('expiration', expiarationDate.toISOString());
- }
-
- // clear locally sotred auth data in timeout or sign out
- private clearAuthData() {
-   localStorage.removeItem('token');
-   localStorage.removeItem('expiration');
- }
-
- // access locally stored auth data
- private getAuthData() {
-   const token = localStorage.getItem('token');
-   const expiration = localStorage.getItem('expiration');
-   if (!token || !expiration) {
-     return;
-   }
-   return {
-     token,
-     expiarationDate : new Date(expiration),
-   };
- }
 
 }

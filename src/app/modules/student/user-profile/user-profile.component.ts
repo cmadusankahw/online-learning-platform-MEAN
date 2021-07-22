@@ -75,6 +75,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       const user: Student = {
         studentId: this.student.studentId,
         studentName: editForm.value.user_name,
+        user_type: this.student.user_type,
         profilePic: this.student.profilePic,
         email: editForm.value.email,
         contactNo: editForm.value.contact_no,
