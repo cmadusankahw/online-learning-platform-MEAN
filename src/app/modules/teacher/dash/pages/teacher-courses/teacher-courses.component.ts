@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 
 
 import { Subscription } from 'rxjs';
+import { Course } from '../../../teacher.model';
+import { TeacherService } from '../../../teacher.service';
 
 
 @Component({
@@ -17,49 +19,45 @@ export class TeacherCoursesComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['user_type', 'name', 'email', 'amount_due', 'amount_paid', 'action'];
   dataSource: MatTableDataSource<Course>;
 
-  payDisplayedColumns: string[] = ['year', 'month', 'paid_date', 'amount_due', 'amount_paid'];
-  payDataSource: MatTableDataSource<PaymentData>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   // subscritions
-  private paymentDataSub: Subscription;
+  private courseSub: Subscription;
 
   // final payments list
-  payments: MerchantPayments[] = [];
+  courses: Course[] = [];
 
   // recieved state
   @Input() userType = 'serviceProvider';
 
-  // payment arrays
-  recievedPayments: MerchantPayments[] = [];
 
   // selected payment
-  selectedPayment: MerchantPayments;
+  selectedCourse: Course;
 
 
-  constructor(private adminService: AdminService) { }
+  constructor(private teacherService: TeacherService) { }
 
   ngOnInit() {
      // get admin for child comp use
-   this.adminService.getAdminPayments();
-   this.paymentDataSub = this.adminService.getMerchantPaymentsUpdateListener().subscribe(
-     payments => {
-       if (payments) {
-         this.recievedPayments = payments;
-         console.log(this.recievedPayments);
-         this.dataSource = new MatTableDataSource(this.addPayments(this.recievedPayments, this.userType));
-         this.dataSource.paginator = this.paginator;
-         this.dataSource.sort = this.sort;
-      }
-     });
-  }
+  //  this.adminService.getAdminPayments();
+  //  this.paymentDataSub = this.adminService.getMerchantPaymentsUpdateListener().subscribe(
+  //    payments => {
+  //      if (payments) {
+  //        this.recievedPayments = payments;
+  //        console.log(this.recievedPayments);
+  //        this.dataSource = new MatTableDataSource(this.addPayments(this.recievedPayments, this.userType));
+  //        this.dataSource.paginator = this.paginator;
+  //        this.dataSource.sort = this.sort;
+  //     }
+  //    });
+   }
 
   ngOnDestroy() {
 
-    if (this.paymentDataSub) {
-      this.paymentDataSub.unsubscribe();
+    if (this.courseSub) {
+      this.courseSub.unsubscribe();
     }
   }
 
@@ -75,33 +73,35 @@ export class TeacherCoursesComponent implements OnInit, OnDestroy {
 
 
   // classify reieved merchant payments
-  addPayments(payments: MerchantPayments[], state: string): MerchantPayments[] {
-    const pendingBookings = [];
-    for (const val of payments) {
-      if (val.user_type === state) {
-        pendingBookings.push(Object.assign({}, val));
-      }
-    }
-    this.payments = [...pendingBookings];
-    return this.payments;
-  }
+  // addPayments(payments: MerchantPayments[], state: string): MerchantPayments[] {
+  //   const pendingBookings = [];
+  //   for (const val of payments) {
+  //     if (val.user_type === state) {
+  //       pendingBookings.push(Object.assign({}, val));
+  //     }
+  //   }
+  //   this.payments = [...pendingBookings];
+  //   return this.payments;
+  // }
 
   // get selected payment details
-  showPaymentDetails(userId: string) {
-    for (const app of this.payments) {
-      if (app.user_id === userId) {
-        this.selectedPayment = app;
-      }
-    }
-    this.payDataSource = new MatTableDataSource(this.selectedPayment.pays);
-    this.payDataSource.paginator = this.paginator;
-  }
+  // showPaymentDetails(userId: string) {
+  //   for (const app of this.payments) {
+  //     if (app.user_id === userId) {
+  //       this.selectedPayment = app;
+  //     }
+  //   }
+  //   this.payDataSource = new MatTableDataSource(this.selectedPayment.pays);
+  //   this.payDataSource.paginator = this.paginator;
+  // }
 
   // get last payment details
-  getLastPayData(payment: MerchantPayments): PaymentData {
-    let lastPay: PaymentData;
-    for (var pay of payment.pays) {
-      lastPay = pay;
-    }
-    return lastPay;
-  }
+  // getLastPayData(payment: MerchantPayments): PaymentData {
+  //   let lastPay: PaymentData;
+  //   for (var pay of payment.pays) {
+  //     lastPay = pay;
+  //   }
+  //   return lastPay;
+  // }
+
+}
