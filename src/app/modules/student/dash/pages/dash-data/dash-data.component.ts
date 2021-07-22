@@ -81,7 +81,7 @@ export class DashDataComponent implements OnInit, OnDestroy {
     //   });
     this.getcourse(coursess);
     this.selected = this.cour[0].title;
-   
+
     // console.log('es', th.cour[0]link);
 
   }
@@ -108,25 +108,25 @@ selectvideo(link, type, comments, title) {
 }
 
 getcourse(courseids) {
- 
+
     const courid = courseids;
     const details = {courseid: courid };
     this.http
-    .post< any >('http://localhost:3000/learn-online/v1/video/getvideo', details)
+    .post< any >('https://chemwin-backend.uc.r.appspot.com/learn-online/v1/video/getvideo', details)
     .subscribe(responseData => {
       console.log(responseData);
       const datas = responseData;
       const newda = datas.message;
       this.cour = newda ;
       console.log(newda);
-     
+
     });
-  
-  
- 
+
+
+
 
   }
 
- 
+
 
 }

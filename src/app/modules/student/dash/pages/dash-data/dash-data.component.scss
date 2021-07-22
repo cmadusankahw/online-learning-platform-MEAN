@@ -203,3 +203,17 @@ mat-card-content{
 }
 
 
+
+@media screen and (max-width: 600px) {
+  .vid-icon{
+    height:0;
+  }
+
+  .mat-card-image{
+    height:0;
+  }
+
+  .other-details{
+    text-align: center;
+  }
+  }

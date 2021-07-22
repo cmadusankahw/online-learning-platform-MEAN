@@ -88,7 +88,7 @@ makepayemnt = 'No';
 
     this.checkstatus().then(res =>  this.getcourse());
 
-    
+
   }
 
   ngOnDestroy() {
@@ -98,19 +98,19 @@ makepayemnt = 'No';
   }
 
   getcourse() {
-  
+
     if (this.checkstatuss !== 'deactive') {
       console.log('here');
       const details = {teacherid: '123', class: '2023' };
       this.http
-    .post< any >('http://localhost:3000/learn-online/v1/course/getcourse', details)
+    .post< any >('https://chemwin-backend.uc.r.appspot.com/learn-online/v1/course/getcourse', details)
     .subscribe(responseData => {
       console.log(responseData);
       const datas = responseData;
       const newda = datas.message;
       this.cour = newda ;
       console.log(this.cour);
-    
+
 
     });
 
@@ -123,15 +123,15 @@ makepayemnt = 'No';
       return new Promise<void>((resolve, reject) => {
       const details = {teacherid: this.teacherid, studentid: this.studentid  };
       this.http
-      .post< any >('http://localhost:3000/learn-online/v1/teacher/chekstatus', details)
+      .post< any >('https://chemwin-backend.uc.r.appspot.com/learn-online/v1/teacher/chekstatus', details)
       .subscribe(responseData => {
         console.log(responseData);
         const datas = responseData;
         const newda = datas.message[0].status;
-       
+
         console.log(newda);
         this.checkstatuss = newda;
-    
+
       });
       resolve();
     });

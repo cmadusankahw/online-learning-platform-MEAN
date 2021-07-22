@@ -1,4 +1,4 @@
-<div class=" container-fluid ml-3 mr-3 mt-3 pb-2">
+<div class=" container-fluid mt-3 pb-2">
     <div class="mt-3 mb-2 text-center">
         <h2><strong> {{studentName}} ඇතුළත්වූ පාඨමාලා</strong></h2>
 
@@ -11,7 +11,10 @@
                 <mat-card-title>{{course.courseName + ' ' + course.class}}</mat-card-title>
             </mat-card-header>
             <br>
-            <img mat-card-image [src]="course.thumbnail" height="200" alt="Photo of a course">
+            <div class="gr-thumbnail">
+                {{course.class}}
+            </div>
+
             <mat-card-content>
                 <p>
                     <b>ඉගැන්වීම : </b> {{course.teacher[0].teacherName}}

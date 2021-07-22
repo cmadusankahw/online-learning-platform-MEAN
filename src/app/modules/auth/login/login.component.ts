@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   get password() { return this.loginForm.get('password'); }
 
 
-  loginUser(loginform: NgForm) {
+  loginUser(loginform) {
     if (this.loginForm.invalid) {
       console.log('form invalid');
       this.dialog.open(ErrorComponent, {data: {message: 'Incorrect Username or Password'}});
