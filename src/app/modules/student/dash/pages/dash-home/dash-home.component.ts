@@ -62,7 +62,7 @@ makepayemnt = 'No';
     }
   ];
 
-  studentName = 'අසංක ඉදුනිල් ';
+  studentName = 'ඔබ ';
   cour = [];
 
   private userSub: Subscription;
