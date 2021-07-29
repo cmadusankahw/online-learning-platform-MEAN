@@ -30,26 +30,31 @@
         </mat-card>
     </div>
 
-    <div class="mt-2 mb-1 card-box" *ngIf="checkstatuss==='deactive'">
-        <mat-card class="example-card">
-            <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>Please Make Payement</mat-card-title>
-            </mat-card-header>
-            <br>
-            <img mat-card-image src="https://qualityinspection.org/wp-content/uploads/2012/01/HowtoPayChineseSuppliersbyBankTransferTT.jpg" height="200" alt="Photo of a course">
-            <mat-card-content>
-                <p>
-                    <b>Do you need to register class please conatct us 077656556 </b>
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <div class="buttons">
-                    <button mdbBtn color="orange" rounded="true" block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect>
-        ඇතුලුවන්න
-        </button>
-                </div>
-            </mat-card-actions>
-        </mat-card>
+    <div class="text-center mt-5 pt-3 pb-5 mb-5" *ngIf="checkstatuss==='deactive'">
+
+                <h2>
+                    <strong>ඔබගේ ගිණුම තාවකාලිකව ක්රියා විරහිත කර ඇත. පංති ගාස්තු ගෙවීමෙන් අනතුරුව නැවත ක්රියාත්මක වනු ඇත.
+                      </strong>
+                </h2>
+
+                <h3>
+                  <br>
+                  විමසීම්   0771385116
+                </h3>
+
     </div>
+
+    <div class="text-center mt-5 pt-3 pb-5 mb-5" *ngIf="checkstatuss==='pending'">
+
+              <h2>
+                  <strong>ඔබගේ ගිණුම තවමත් ක්රියාත්මක කර නැත. පංති ගාස්තු ගෙවූ බව තහවුරු කිරීමෙන් පසු ක්රියාත්මක කරනු ලැබේ
+                       </strong>
+              </h2>
+
+              <h3>
+                <br>
+                    විමසීම්   0771385116
+              </h3>
+
+  </div>
 </div>

@@ -99,7 +99,7 @@ makepayemnt = 'No';
 
   getcourse() {
 
-    if (this.checkstatuss !== 'deactive') {
+    if (this.checkstatuss !== 'deactive' && this.checkstatuss !== 'pending') {
       console.log('here');
       const details = {teacherid: '123', class: '2023' };
       this.http
