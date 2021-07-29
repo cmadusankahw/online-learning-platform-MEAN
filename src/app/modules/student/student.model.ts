@@ -17,10 +17,13 @@ export interface Student {
   email: string;
   contactNo: string;
   gender: string;
-  location: string;
+  cardId: string;
+  Nic: string,
   class: number;
+  teacherId: string;
   stream: string;
   subjects: string[];
+  status:string;
 }
 
 export interface Course {
@@ -39,4 +42,12 @@ export interface VideoLink {
   link: string;
   expiresIn: string;
   comments: string;
+}
+
+export interface HeaderDetails{
+  userType: string,
+  userName: string,
+  profilePic: string,
+  cardId: string,
+  status: string;
 }

@@ -70,9 +70,12 @@ export class AddUserComponent implements OnInit, OnDestroy {
           email: signupForm.value.user_email,
           contactNo: signupForm.value.contact_no,
           gender:  signupForm.value.gender,
-          location:  signupForm.value.location,
+          cardId: signupForm.value.cardid,
+          Nic: signupForm.value.nic,
           class:  signupForm.value.al_class,
+          teacherId: 't1',
           stream:  'any', // get from form if required
+          status:"New",
           subjects:[]
           };
         this.authService.signUp(user, signupForm.value.user_pass);

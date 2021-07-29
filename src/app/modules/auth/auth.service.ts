@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
 import { MatDialog, MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material';
-import { Student } from '../student/student.model';
+import { HeaderDetails, Student } from '../student/student.model';
 import { getHeader, getLastId, postSignIn, url, postSignUp, postUploadImage, getStudent, getAuthStudent, getStudents, putUpdateStudent, putUpdateSelectedStudent, deleteStudent, getClassStudents } from '../student/student.config';
 import { LogIn } from './auth.model';
 import { SuccessComponent } from 'src/app/success/success.component';
@@ -17,7 +17,7 @@ export class AuthService {
   private currentStudentUpdated = new Subject<Student>();
   private studentsUpdated = new Subject<Student[]>();
   private authStatusListener = new Subject<boolean>();
-  private headerDetailsListener = new Subject<{userType: string, userName: string, profilePic: string}>();
+  private headerDetailsListener = new Subject<HeaderDetails>();
 
   // user logged in
   private currentStudent: Student;
@@ -35,7 +35,7 @@ export class AuthService {
   // timer to auto logout
   private tokenTimer: any;
 
-  private headerDetails: {userType: string, userName: string, profilePic: string};
+  private headerDetails: HeaderDetails;
 
   // user login status
   private isAuthenticated = false;
@@ -87,12 +87,14 @@ export class AuthService {
   // get details for header
   getHeaderDetails() {
     if (this.token) {
-      this.http.get<{user_type: string, user_name: string, profile_pic: string}>(url + getHeader)
+      this.http.get<{user_type: string, user_name: string, profile_pic: string, cardId: string, status: string;}>(url + getHeader)
       .subscribe((recievedHeader) => {
         this.headerDetails = {
           userType: recievedHeader.user_type,
           userName: recievedHeader.user_name,
-          profilePic: recievedHeader.profile_pic};
+          profilePic: recievedHeader.profile_pic,
+          cardId: recievedHeader.cardId,
+          status: recievedHeader.status};
         this.headerDetailsListener.next(this.headerDetails);
     });
     }

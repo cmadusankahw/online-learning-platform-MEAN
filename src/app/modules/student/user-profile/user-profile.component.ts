@@ -80,10 +80,13 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         email: editForm.value.email,
         contactNo: editForm.value.contact_no,
         gender: editForm.value.gender,
-        location: editForm.value.location,
+        cardId:  this.student.cardId,
+        Nic:  this.student.Nic,
         class: this.student.class,
+        teacherId: this.student.teacherId,
         stream:this.student.stream,
         subjects:this.student.subjects,
+        status:this.student.status,
         };
       this.authService.updateStudent(user, this.image);
       this.userSubs = this.authService.getStudentUpdatteListener()
