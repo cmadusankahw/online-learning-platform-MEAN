@@ -73,7 +73,7 @@
             text="white"
             class="btn btn-sm text-center"
             (click)="showUserDetails(row.userId)"
-            (click)="idOptions.show()"
+
           >
             View Data
           </button>
@@ -96,7 +96,7 @@
 
 
 <!--View Details Modal-->
-<div
+<!-- <div
   mdbModal
   #idOptions="mdbModal"
   class="modal fade"
@@ -280,7 +280,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 
@@ -323,9 +323,8 @@ aria-labelledby="myModalLabel" aria-hidden="true"
     <!--Footer-->
     <div class="modal-footer justify-content-center">
       <a type="button" mdbBtn color="red" class="waves-effect btn btn-md"
-      (click) = "removeUser(user.userId)"
+      (click) = "removeUser(user.studentId)"
       (click)="confirmDialog.hide()"
-      (click)="idOptions.hide()"
       mdbWavesEffect> Remove User
         <mdb-btn far icon="check" class="ml-1"></mdb-btn>
       </a>
@@ -381,7 +380,6 @@ aria-labelledby="myModalLabel" aria-hidden="true"
       <a type="button" mdbBtn color="primary" class="waves-effect btn btn-md"
       (click) = "updateUser(user)"
       (click)="confirmDialogUpdate.hide()"
-      (click)="idOptions.hide()"
       mdbWavesEffect> Commit Changes
         <mdb-btn far icon="check" class="ml-1"></mdb-btn>
       </a>

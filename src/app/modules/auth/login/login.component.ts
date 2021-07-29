@@ -30,25 +30,25 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     // login form validation
     this.loginForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
+      cardId: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required]),
     });
 
   }
 
   // get form elements
-  get email() { return this.loginForm.get('email'); }
+  get cardId() { return this.loginForm.get('cardId'); }
   get password() { return this.loginForm.get('password'); }
 
 
-  loginUser(loginform: NgForm) {
+  loginUser(loginform) {
     if (this.loginForm.invalid) {
       console.log('form invalid');
-      this.dialog.open(ErrorComponent, {data: {message: 'Incorrect Username or Password'}});
+      this.dialog.open(ErrorComponent, {data: {message: 'Incorrect Card ID or Password'}});
     } else {
       this.showAlert = false;
       const login: LogIn = {
-        email: loginform.value.email,
+        cardId: loginform.value.cardId,
         password: loginform.value.password
       };
       this.authService.signIn(login);

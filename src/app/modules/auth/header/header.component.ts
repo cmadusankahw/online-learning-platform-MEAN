@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Subscription } from 'rxjs';
+import { HeaderDetails } from '../../student/student.model';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
 
   // get signed user type
-  headerDetails: {userType: string, userName: string, profilePic: string};
+  headerDetails: HeaderDetails;
 
 
   ngOnInit() {

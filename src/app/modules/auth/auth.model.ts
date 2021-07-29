@@ -10,7 +10,7 @@ export interface User {
 }
 
 export interface LogIn {
-  email: string;
+  cardId: string;
   password: string;
 }
 

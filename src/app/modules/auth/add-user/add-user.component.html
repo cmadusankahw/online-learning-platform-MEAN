@@ -7,9 +7,8 @@
     <p>අවශ්‍ය තොරතුරු ලබා දෙන්න</p>
   </div>
 
-  <!--Card content-->
+
   <mdb-card-body class="px-lg-5 pt-0">
-    <!-- Form -->
     <br />
     <form
       style="color: #757575"
@@ -18,15 +17,15 @@
     >
       <div class="text-center">
         <!-- <mat-form-field class="mfield">
-          <mat-label>Select Your Plan</mat-label>
+          <mat-label>Select Class</mat-label>
           <mat-select required name="user_type" #user_type="ngModel" ngModel>
             <mat-option value="usertype_1"> $5 /mo (3 months free)</mat-option>
             <mat-option value="usertype_2"> $10 /mo (3 months free)</mat-option>
             <mat-option value="usertype_3"> $25 /mo (3 months free</mat-option>
           </mat-select>
           <mat-error *ngIf="user_type.invalid">Select User Type</mat-error>
-        </mat-form-field>
-      -->
+        </mat-form-field> -->
+
       <hr>
         <div class="pt-2" >
           <h5>ඔබෙි විස්තර </h5>
@@ -75,6 +74,17 @@
         </mat-form-field>
 
         <mat-form-field class="mfield">
+          <input matInput placeholder="කාඩ්පත් අංකය  " required name="cardid" #cardid="ngModel" ngModel />
+
+      </mat-form-field>
+
+      <mat-form-field class="mfield">
+        <input matInput placeholder="ජාතික හැදුනුම්පත් අංකය  " required name="nic" #nic="ngModel" ngModel />
+        <mat-error *ngIf="nic.invalid">Please Provide a Valid NIC</mat-error>
+    </mat-form-field>
+
+
+        <mat-form-field class="mfield">
           <mat-label>පිරිමි/ ගැහැණු අයදුම් කරුවෙකි </mat-label>
           <mat-select required name="gender" #gender="ngModel" ngModel>
             <mat-option value="male">පිරිමි</mat-option>
@@ -102,7 +112,7 @@
           >
         </mat-form-field>
 
-
+<!--
         <mat-form-field class="mfield">
           <input
             matInput
@@ -115,7 +125,7 @@
           <mat-error *ngIf="location.invalid"
             >Living Address is required</mat-error
           >
-        </mat-form-field>
+        </mat-form-field> -->
 
 
       </div>
@@ -162,7 +172,6 @@
       <br />
       <br>
 
-      <!-- Sign up complete button -->
       <button
         mdbBtn
         color="orange"
@@ -175,6 +184,6 @@
       </button>
       <br />
     </form>
-    <!-- Form -->
+
   </mdb-card-body>
 </mdb-card>
