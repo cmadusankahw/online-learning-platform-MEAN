@@ -74,17 +74,17 @@ makepayemnt = 'No';
   constructor(private authService: AuthService, public http: HttpClient) { }
 
   ngOnInit() {
-  // this.authService.autoAuthUser();
-  //   this.userSub = this.authService.getCurrentUserUpdatteListener()
-    //   .subscribe((res: Student) => {
-      //   if (res) {
-      //    this.user = res;
-       //    this.studentName = res.studentName;
-       //  }
-  //  }, (error) => {
+   //this.authService.autoAuthUser();
+   // this.userSub = this.authService.getCurrentUserUpdatteListener()
+     // .subscribe((res: Student) => {
+     //   if (res) {
+     //    this.user = res;
+      //    this.studentName = res.studentName;
+      //   }
+    //,  (error: any) => {
     //  console.log(error);
-    // });
-    this.getcourse();
+    // }; );
+   // this.getcourse();
 
     this.checkstatus().then(res =>  this.getcourse());
 
@@ -98,6 +98,7 @@ makepayemnt = 'No';
   }
 
   getcourse() {
+    console.log(this.checkstatuss);
 
     if (this.checkstatuss !== 'deactive' && this.checkstatuss !== 'pending') {
       console.log('here');
@@ -120,6 +121,7 @@ makepayemnt = 'No';
     }
 
     checkstatus() {
+      console.log( this.teacherid, this.studentid );
       return new Promise<void>((resolve, reject) => {
       const details = {teacherid: this.teacherid, studentid: this.studentid  };
       this.http

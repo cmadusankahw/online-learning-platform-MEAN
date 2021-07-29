@@ -1,5 +1,5 @@
-const url: string = "https://chemwin-backend.uc.r.appspot.com/learn-online/v1/";
-
+//const url: string = "https://chemwin-backend.uc.r.appspot.com/learn-online/v1/";
+const url: string = 'http://localhost:3000/learn-online/v1/';
 
 const getStudent = 'auth/student/one'; // userId
 const getAuthStudent = 'auth/student/current'; // userId
