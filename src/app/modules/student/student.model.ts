@@ -20,7 +20,7 @@ export interface Student {
   cardId: string;
   Nic: string,
   class: number;
-  teacherId: string;
+  teacherid: string;
   stream: string;
   subjects: string[];
   status:string;

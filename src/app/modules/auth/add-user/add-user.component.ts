@@ -73,7 +73,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
           cardId: signupForm.value.cardid,
           Nic: signupForm.value.nic,
           class:  signupForm.value.al_class,
-          teacherId: 't1',
+          teacherid: 't1',
           stream:  'any', // get from form if required
           status:"New",
           subjects:[]

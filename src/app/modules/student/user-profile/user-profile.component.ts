@@ -83,7 +83,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         cardId:  this.student.cardId,
         Nic:  this.student.Nic,
         class: this.student.class,
-        teacherId: this.student.teacherId,
+        teacherid: this.student.teacherid,
         stream:this.student.stream,
         subjects:this.student.subjects,
         status:this.student.status,
