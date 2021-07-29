@@ -97,19 +97,12 @@
 
         <hr>
 
-        <mat-form-field class="mfield">
-          <input
-            matInput
-            placeholder="A/L පෙනී සිටින වර්ශය "
-            type="number"
-            required
-            name="al_class"
-            #al_class="ngModel"
-            ngModel
-          />
-          <mat-error *ngIf="al_class.invalid"
-            >A/L Year is required</mat-error
-          >
+   <mat-form-field class="mfield">
+          <mat-label>"A/L පෙනී සිටින වර්ශය</mat-label>
+          <mat-select required name="al_class" #al_class="ngModel" ngModel>
+            <mat-option value="2023"> 2023</mat-option>
+          </mat-select>
+          <mat-error *ngIf="al_class.invalid">A/L Year is required</mat-error>
         </mat-form-field>
 
 <!--

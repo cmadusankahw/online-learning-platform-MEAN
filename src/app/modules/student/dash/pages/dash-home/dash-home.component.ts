@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/modules/auth/auth.service';
-import { Course, Student } from '../../../student.model';
+import { Course, HeaderDetails, Student } from '../../../student.model';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-dash-home',
@@ -13,6 +13,7 @@ export class DashHomeComponent implements OnInit, OnDestroy {
   checkstatuss = 'active';
   studentid = 'U1';
   teacherid = '123';
+
 makepayemnt = 'No';
   courses: Course[] = [
     {
@@ -74,19 +75,20 @@ makepayemnt = 'No';
   constructor(private authService: AuthService, public http: HttpClient) { }
 
   ngOnInit() {
-   //this.authService.autoAuthUser();
-   // this.userSub = this.authService.getCurrentUserUpdatteListener()
-     // .subscribe((res: Student) => {
-     //   if (res) {
-     //    this.user = res;
-      //    this.studentName = res.studentName;
-      //   }
-    //,  (error: any) => {
-    //  console.log(error);
-    // }; );
-   // this.getcourse();
+   this.authService.getAuthStudent();
+   this.userSub = this.authService.getCurrentStudentUpdatedListener()
+     .subscribe((res: Student) => {
+       if (res) {
+         this.studentid = res.studentId;
+         this.studentName = res.studentName;
+         this.teacherid = res.teacherid;
+         this.user = res;
+         this.getcourse();
+         this.checkstatus().then(res =>  this.getcourse());
 
-    this.checkstatus().then(res =>  this.getcourse());
+        }} ,(error: any) => {
+     console.log(error);
+    });
 
 
   }
@@ -102,7 +104,7 @@ makepayemnt = 'No';
 
     if (this.checkstatuss !== 'deactive' && this.checkstatuss !== 'pending') {
       console.log('here');
-      const details = {teacherid: '123', class: '2023' };
+      const details = {teacherid: this.teacherid, class: '2023' };
       this.http
     .post< any >('https://chemwin-backend.uc.r.appspot.com/learn-online/v1/course/getcourse', details)
     .subscribe(responseData => {
