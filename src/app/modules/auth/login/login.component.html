@@ -26,16 +26,16 @@
           <input
             mdbInput
             mdbValidate
-            type="email"
+            type="text"
             id="form8"
             class="form-control"
-            formControlName="email"
-            name="email"
+            formControlName="cardId"
+            name="cardId"
             required
             ngModel
           />
           <label for="form8">ගිණුම් අංකය (කාඩ් අංකය)</label>
-          <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)"
+          <mdb-error *ngIf="cardId.invalid && (cardId.dirty || cardId.touched)"
             >ගිණුම් අංකය අවශ්‍යයි </mdb-error
           >
         </div>
