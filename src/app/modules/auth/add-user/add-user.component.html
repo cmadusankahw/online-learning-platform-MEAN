@@ -1,22 +1,18 @@
 <mdb-card>
-  <div class="text-center container-fluid mt-5 mb-2">
-    <img src="./assets/images/scraper/logo_lg.png" height="80" alt="web_scraper_logo"/>
-  </div>
-  <div class="text-center pt-3">
-    <h3><strong> e-Learning ගිණුමක් සාදා ගන්න </strong></h3>
-    <p>අවශ්‍ය තොරතුරු ලබා දෙන්න</p>
-  </div>
+    <div class="text-center container-fluid mt-5 mb-2">
+        <img src="./assets/images/scraper/logo_lg.png" height="80" alt="web_scraper_logo" />
+    </div>
+    <div class="text-center pt-3">
+        <h3><strong> e-Learning ගිණුමක් සාදා ගන්න </strong></h3>
+        <p>අවශ්‍ය තොරතුරු ලබා දෙන්න</p>
+    </div>
 
 
-  <mdb-card-body class="px-lg-5 pt-0">
-    <br />
-    <form
-      style="color: #757575"
-      (submit)="signupUser(signupform)"
-      #signupform="ngForm"
-    >
-      <div class="text-center">
-        <!-- <mat-form-field class="mfield">
+    <mdb-card-body class="px-lg-5 pt-0">
+        <br />
+        <form style="color: #757575" (submit)="signupUser(signupform)" #signupform="ngForm">
+            <div class="text-center">
+                <!-- <mat-form-field class="mfield">
           <mat-label>Select Class</mat-label>
           <mat-select required name="user_type" #user_type="ngModel" ngModel>
             <mat-option value="usertype_1"> $5 /mo (3 months free)</mat-option>
@@ -26,86 +22,57 @@
           <mat-error *ngIf="user_type.invalid">Select User Type</mat-error>
         </mat-form-field> -->
 
-      <hr>
-        <div class="pt-2" >
-          <h5>ඔබෙි විස්තර </h5>
-        </div>
+                <hr>
+                <div class="pt-2">
+                    <h5>ඔබෙි විස්තර </h5>
+                </div>
 
-        <mat-form-field class="mfield">
-          <input
-            matInput
-            type="text"
-            placeholder="ඔබෙි නම "
-            required
-            name="user_name"
-            #user_name="ngModel"
-            ngModel
-          />
-          <mat-error *ngIf="user_name.invalid">User Name is required</mat-error>
-        </mat-form-field>
+                <mat-form-field class="mfield">
+                    <input matInput type="text" placeholder="ඔබෙි නම " required name="user_name" #user_name="ngModel" ngModel />
+                    <mat-error *ngIf="user_name.invalid">User Name is required</mat-error>
+                </mat-form-field>
 
-        <mat-form-field class="mfield">
-          <input
-            matInput
-            type="email"
-            placeholder="ඔබෙි විද්‍යුත් තැපැල් ලි්පිනය "
-            required
-            name="user_email"
-            #user_email="ngModel"
-            ngModel
-          />
-          <mat-error *ngIf="user_email.invalid"
-            >A valid Email is required</mat-error
-          >
-        </mat-form-field>
+                <mat-form-field class="mfield">
+                    <input matInput type="email" placeholder="ඔබෙි විද්‍යුත් තැපැල් ලි්පිනය " required name="user_email" #user_email="ngModel" ngModel />
+                    <mat-error *ngIf="user_email.invalid">A valid Email is required</mat-error>
+                </mat-form-field>
 
-        <mat-form-field class="mfield">
-          <input
-            matInput
-            placeholder="ඔබෙි දුරකථන අංකය "
-            required
-            name="contact_no"
-            #contact_no="ngModel"
-            ngModel
-          />
-          <mat-error *ngIf="contact_no.invalid"
-            >Please Provide a Valid Contact No</mat-error
-          >
-        </mat-form-field>
+                <mat-form-field class="mfield">
+                    <input matInput placeholder="ඔබෙි දුරකථන අංකය " required name="contact_no" #contact_no="ngModel" ngModel />
+                    <mat-error *ngIf="contact_no.invalid">Please Provide a Valid Contact No</mat-error>
+                </mat-form-field>
 
-        <mat-form-field class="mfield">
-          <input matInput placeholder="කාඩ්පත් අංකය  " required name="cardid" #cardid="ngModel" ngModel />
+                <mat-form-field class="mfield">
+                    <input matInput placeholder="කාඩ්පත් අංකය  " required name="cardid" #cardid="ngModel" ngModel />
 
-      </mat-form-field>
+                </mat-form-field>
 
-      <mat-form-field class="mfield">
-        <input matInput placeholder="ජාතික හැදුනුම්පත් අංකය  " required name="nic" #nic="ngModel" ngModel />
-        <mat-error *ngIf="nic.invalid">Please Provide a Valid NIC</mat-error>
-    </mat-form-field>
+                <mat-form-field class="mfield">
+                    <input matInput placeholder="ජාතික හැදුනුම්පත් අංකය  " required name="nic" #nic="ngModel" ngModel />
+                    <mat-error *ngIf="nic.invalid">Please Provide a Valid NIC</mat-error>
+                </mat-form-field>
 
 
-        <mat-form-field class="mfield">
-          <mat-label>පිරිමි/ ගැහැණු අයදුම් කරුවෙකි </mat-label>
-          <mat-select required name="gender" #gender="ngModel" ngModel>
-            <mat-option value="male">පිරිමි</mat-option>
-            <mat-option value="female">ගැහැණු</mat-option>
-          </mat-select>
-          <mat-error *ngIf="gender.invalid"
-            >Please Select your Gender</mat-error
-          >
-        </mat-form-field>
+                <mat-form-field class="mfield">
+                    <mat-label>පිරිමි/ ගැහැණු අයදුම් කරුවෙකි </mat-label>
+                    <mat-select required name="gender" #gender="ngModel" ngModel>
+                        <mat-option value="male">පිරිමි</mat-option>
+                        <mat-option value="female">ගැහැණු</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="gender.invalid">Please Select your Gender</mat-error>
+                </mat-form-field>
 
-        <hr>
+                <hr>
 
-   <mat-form-field class="mfield">
-          <mat-label>"A/L පෙනී සිටින වර්ශය</mat-label>
-          <mat-select required name="al_class" #al_class="ngModel" ngModel>
-            <mat-option value="2023"> 2023</mat-option>
-          </mat-select>
-          <mat-error *ngIf="al_class.invalid">A/L Year is required</mat-error>
-        </mat-form-field>
+                <mat-form-field class="mfield">
+                    <mat-label>"A/L පෙනී සිටින වර්ශය</mat-label>
+                    <mat-select required name="al_class" #al_class="ngModel" ngModel>
+                        <mat-option value="2023"> 2023</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="al_class.invalid">A/L Year is required</mat-error>
+                </mat-form-field>
 
-<!--
+                <!--
         <mat-form-field class="mfield">
           <input
             matInput
@@ -121,62 +88,33 @@
         </mat-form-field> -->
 
 
-      </div>
+            </div>
 
-      <hr />
+            <hr />
 
-      <div class="row">
-        <div class="col-md-6">
-          <mat-form-field class="mfield">
-            <input
-              matInput
-              type="password"
-              placeholder="මුරපදය ඇතුළත් කරන්න "
-              required
-              pattern="^(?=.*\d).{4,8}$"
-              name="user_pass"
-              #user_pass="ngModel"
-              ngModel
-            />
-            <mat-error *ngIf="user_pass.invalid"
-              >Password is required</mat-error
-            >
-          </mat-form-field>
-        </div>
-        <div class="col-md-6">
-          <mat-form-field class="mfield">
-            <input
-              matInput
-              type="password"
-              placeholder="මුරපදය තහවුරු කරන්න "
-              required
-              pattern="^(?=.*\d).{4,8}$"
-              name="user_pass_check"
-              #user_pass_check="ngModel"
-              ngModel
-            />
-            <mat-error *ngIf="user_pass_check.invalid"
-              >Valid Password Cnfirmation is required</mat-error
-            >
-          </mat-form-field>
-        </div>
-      </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field class="mfield">
+                        <input matInput type="password" placeholder="මුරපදය ඇතුළත් කරන්න " required name="user_pass" #user_pass="ngModel" ngModel />
+                        <mat-error *ngIf="user_pass.invalid">Password is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="mfield">
+                        <input matInput type="password" placeholder="මුරපදය තහවුරු කරන්න " required name="user_pass_check" #user_pass_check="ngModel" ngModel />
+                        <mat-error *ngIf="user_pass_check.invalid">Valid Password Cnfirmation is required</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
 
-      <br />
-      <br>
+            <br />
+            <br>
 
-      <button
-        mdbBtn
-        color="orange"
-        rounded="true"
-        block="true"
-        mdbWavesEffect
-        type="submit"
-      >
+            <button mdbBtn color="orange" rounded="true" block="true" mdbWavesEffect type="submit">
       ගිණුම සාදන්න
       </button>
-      <br />
-    </form>
+            <br />
+        </form>
 
-  </mdb-card-body>
+    </mdb-card-body>
 </mdb-card>
