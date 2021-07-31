@@ -30,7 +30,7 @@
 
 <!--user navbar-->
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg sticky-top navbar-light white scrolling-navbar" [containerInside]="false" *ngIf="userIsAuthenticated  && headerDetails.userType == 'teacher'">
+<mdb-navbar SideClass="navbar navbar-expand-lg sticky-top navbar-light white scrolling-navbar" appNoRightClick [containerInside]="false" *ngIf="userIsAuthenticated  && headerDetails.userType == 'teacher'">
     <!-- Navbar brand -->
     <mdb-navbar-brand>
         <a class="navbar-brand" routerLink="/">
@@ -82,7 +82,7 @@
 
 <!--admin navbar-->
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg sticky-top navbar-light white scrolling-navbar" [containerInside]="false" *ngIf="userIsAuthenticated && headerDetails.userType == 'Student'">
+<mdb-navbar SideClass="navbar navbar-expand-lg sticky-top navbar-light white scrolling-navbar" appNoRightClick [containerInside]="false" *ngIf="userIsAuthenticated && headerDetails.userType == 'Student'">
     <!-- Navbar brand -->
     <mdb-navbar-brand>
         <a class="navbar-brand" routerLink="/">
