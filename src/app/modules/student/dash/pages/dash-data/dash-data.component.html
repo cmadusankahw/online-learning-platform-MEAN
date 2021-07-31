@@ -17,12 +17,15 @@
           <source src="{{playlink}}" type="video/mp4" />
           Browser not supported
       </video>-->
+                        <div class="container" *ngIf="vtype=='y'">
+                            <div id="overlay"> </div>
+                            <div style="position:sticky; padding-top: 56.25%; padding-left: 10em;" appNoRightClick *ngIf="vtype=='y'">
+                                <iframe style="margin-right: 1%; margin-left: 1%;" width="900px" height="500px" [src]='playlink' title="YouTube video player" frameborder="0" loading="lazy" style="border: none; position: absolute; top: 0;left:0;right:0" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                    appNoRightClick fs="0"></iframe> >
 
-                        <div style="position:absolute; padding-top: 56.25%;" appNoRightClick *ngIf="vtype=='y'">
-                            <iframe width="500px" height="300px" [src]='playlink' title="YouTube video player" frameborder="0" loading="lazy" style="border: none; position: absolute; top: 0;left:0;right:0" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                appNoRightClick fs="0"></iframe>
 
-                            <div id="overlay"></div>
+
+                            </div>
 
                         </div>
 
@@ -42,7 +45,7 @@
                               <button mat-button color="gray">< Previous</button>
                               <p style=" font-size:38px; color:gray;"> | </p> <button mat-button color="gray">Next > </button>
                           </div> -->
-                            <p style=" font-size:28px; color:gray;"> තාක්ෂණ සහය | 077 138 31 16 </p>
+
 
                         </div>
 
@@ -61,109 +64,126 @@
             </div>
 
         </div>
-        <div class="row">
+        <div class="row" style="padding-top: 30px;">
             <div class="col-md-8 pb-3">
-                <div class="buttons">
-                    <button class="button" id="play-button">PLAY</button>
-                    <button class="button" id="pause-button">PAUSE</button>
-                    <button class="button" id="stop-button">STOP</button>
+                <p style=" font-size:28px; color:gray;"> තාක්ෂණ සහය | 077 138 51 16 </p>
+                <br>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">වීඩියෝව තෝරන්න.</button>
+
+                <!--another bittonm-->
+                <div class="offcanvas offcanvas-end" tabindex="1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h5 id="offcanvasRightLabel">වීඩියෝව තෝරන්න.</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div *ngFor="let video of cour">
+                            <mat-card class=" now-playing example-card" *ngIf="now_playing_id == video.title">
+                                <mat-card-content>
+                                    <div class="row">
+                                        <div class="col-md-3 text-center">
+                                            <img mat-card-image src="./assets/images/scraper/video_icon.png" class="vid-icon" alt="Video">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h4>{{video.title}}</h4>
+                                            <p>
+                                                <b>ඉගැන්වීම : </b>
+                                            </p>
+                                            <div class="play-icon pause">
+                                                <mdb-icon fas icon="pause"></mdb-icon>
+                                                <span style="font-size:16px;">
+                  නවත්වන්න
+                 </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                </mat-card-content>
+
+                            </mat-card>
+                            <mat-card class="example-card" *ngIf="now_playing_id != video.title" appNoRightClick (click)="selectvideo(video.link,video.type,video.comment,video.title)">
+                                <mat-card-content>
+                                    <div class="row">
+                                        <div class="col-md-3 text-center">
+                                            <img mat-card-image src="./assets/images/scraper/video_icon.png" alt="Video">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h5>{{video.title}}</h5>
+                                            <p>
+
+                                            </p>
+                                            <div class="play-icon">
+                                                <mdb-icon fas icon="play" (click)="selectvideo(video.link,video.type,video.comment,video.title)"></mdb-icon>
+                                                <span style="font-size:14px;">
+                  නරඹන්න
+                 </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                </mat-card-content>
+
+                            </mat-card>
+                        </div>
+                    </div>
                 </div>
-                <h4 *ngIf="details!=''"><strong> ගුරුවරයාගේ සටහන් </strong></h4>
-                <hr>
-                <p>{{details}}</p>
+
+
+
+
             </div>
             <div class="col-md-4">
-                <div *ngFor="let video of cour">
-                    <mat-card class=" now-playing example-card" *ngIf="now_playing_id == video.title">
-                        <mat-card-content>
-                            <div class="row">
-                                <div class="col-md-3 text-center">
-                                    <img mat-card-image src="./assets/images/scraper/video_icon.png" class="vid-icon" alt="Video">
-                                </div>
-                                <div class="col-md-8">
-                                    <h4>{{video.title}}</h4>
-                                    <p>
-                                        <b>ඉගැන්වීම : </b>
-                                    </p>
-                                    <div class="play-icon pause">
-                                        <mdb-icon fas icon="pause"></mdb-icon>
-                                        <span style="font-size:16px;">
-          නවත්වන්න
-         </span>
-                                    </div>
-                                    <br>
-                                </div>
-                            </div>
 
-                        </mat-card-content>
-
-                    </mat-card>
-                    <mat-card class="example-card" *ngIf="now_playing_id != video.title" appNoRightClick (click)="selectvideo(video.link,video.type,video.comment,video.title)">
-                        <mat-card-content>
-                            <div class="row">
-                                <div class="col-md-3 text-center">
-                                    <img mat-card-image src="./assets/images/scraper/video_icon.png" alt="Video">
-                                </div>
-                                <div class="col-md-8">
-                                    <h5>{{video.title}}</h5>
-                                    <p>
-
-                                    </p>
-                                    <div class="play-icon">
-                                        <mdb-icon fas icon="play" (click)="selectvideo(video.link,video.type,video.comment,video.title)"></mdb-icon>
-                                        <span style="font-size:14px;">
-          නරඹන්න
-         </span>
-                                    </div>
-                                    <br>
-                                </div>
-                            </div>
-
-                        </mat-card-content>
-
-                    </mat-card>
-                </div>
             </div>
         </div>
 
         <script>
-            // global variable for the player
+            // 2. This code loads the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // 3. This function creates an <iframe> (and YouTube player)
+            //    after the API code downloads.
             var player;
 
-            // this function gets called when API is ready to use
-            function onYouTubePlayerAPIReady() {
-                // create the global player from the specific iframe (#video)
-                player = new YT.Player('video', {
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                    height: '390',
+                    width: '640',
+                    videoId: 'jxq9tfo5D1E',
+                    playerVars: {
+                        'playsinline': 1
+                    },
                     events: {
-                        // call this function when player is ready to use
-                        'onReady': onPlayerReady
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
                     }
                 });
             }
 
+            // 4. The API will call this function when the video player is ready.
             function onPlayerReady(event) {
-                alert("hi")
-                    // bind events
-                var playButton = document.getElementById("play-button");
-                playButton.addEventListener("click", function() {
-                    player.playVideo();
-                });
-
-                var pauseButton = document.getElementById("pause-button");
-                pauseButton.addEventListener("click", function() {
-                    player.pauseVideo();
-                });
-
-                var stopButton = document.getElementById("stop-button");
-                stopButton.addEventListener("click", function() {
-                    player.stopVideo();
-                });
-
+                event.target.playVideo();
             }
 
-            // Inject YouTube API script
-            var tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/player_api";
-            var firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            // 5. The API calls this function when the player's state changes.
+            //    The function indicates that when playing a video (state=1),
+            //    the player should play for six seconds and then stop.
+            var done = false;
+
+            function onPlayerStateChange(event) {
+                if (event.data == YT.PlayerState.PLAYING && !done) {
+                    setTimeout(stopVideo, 6000);
+                    done = true;
+                }
+            }
+
+            function stopVideo() {
+                player.stopVideo();
+            }
         </script>
