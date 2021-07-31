@@ -1,0 +1,190 @@
+<div appNoRightClick>
+  <div *ngIf="cour">
+    <div class="top-content">
+      <div class="mt-3 mb-2 text-center">
+        <h2>
+          <strong> වැඩසටහන: {{ selected }}</strong>
+        </h2>
+      </div>
+      <hr />
+    </div>
+    <div class="bottom-content row">
+      <div class="col-md-12 course-list">
+
+        <div *ngIf="vtype && playlink">
+          <app-video-player [vtype]="vtype" [playlink]="playlink"></app-video-player>
+        </div>
+
+      </div>
+
+      <div *ngIf="!course" class="mt-5 pt-5 mb-5 text-center">
+        <h2><b>පාථමාලාව තවමත් විවෘතව නැත</b></h2>
+      </div>
+    </div>
+    <div class="row" style="padding-top: 30px">
+      <div class="col-md-8 pb-3 mt-5">
+
+        <br />
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight"
+        >
+          වීඩියෝව තෝරන්න.
+        </button>
+
+        <br>
+        <br>
+        <p style="font-size: 28px; color: gray">තාක්ෂණ සහය | 077 138 51 16</p>
+
+        <!--another bittonm-->
+        <div
+          class="offcanvas offcanvas-end"
+          tabindex="1"
+          id="offcanvasRight"
+          aria-labelledby="offcanvasRightLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">වීඩියෝව තෝරන්න.</h5>
+            <button
+              type="button"
+              class="btn-close text-reset"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body">
+            <div *ngFor="let video of cour">
+              <mat-card
+                class="now-playing example-card"
+                *ngIf="now_playing_id == video.title"
+              >
+                <mat-card-content>
+                  <div class="row">
+                    <div class="col-md-3 text-center">
+                      <img
+                        mat-card-image
+                        src="./assets/images/scraper/video_icon.png"
+                        class="vid-icon"
+                        alt="Video"
+                      />
+                    </div>
+                    <div class="col-md-8">
+                      <h4>{{ video.title }}</h4>
+                      <p>
+                        <b>ඉගැන්වීම : </b>
+                      </p>
+                      <div class="play-icon pause">
+                        <mdb-icon fas icon="pause"></mdb-icon>
+                        <span style="font-size: 16px"> නවත්වන්න </span>
+                      </div>
+                      <br />
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+              <mat-card
+                class="example-card"
+                *ngIf="now_playing_id != video.title"
+                data-bs-dismiss="offcanvas"
+                appNoRightClick
+                (click)="
+                  selectvideo(
+                    video.link,
+                    video.type,
+                    video.comment,
+                    video.title
+                  )
+                "
+              >
+                <mat-card-content>
+                  <div class="row">
+                    <div class="col-md-3 text-center">
+                      <img
+                        mat-card-image
+                        src="./assets/images/scraper/video_icon.png"
+                        alt="Video"
+                      />
+                    </div>
+                    <div class="col-md-8">
+                      <h5>{{ video.title }}</h5>
+                      <p></p>
+                      <div class="play-icon">
+                        <mdb-icon
+                          fas
+                          icon="play"
+                          (click)="
+                            selectvideo(
+                              video.link,
+                              video.type,
+                              video.comment,
+                              video.title
+                            )
+                          "
+                        ></mdb-icon>
+                        <span style="font-size: 14px"> නරඹන්න </span>
+                      </div>
+                      <br />
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement("script");
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName("script")[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player("player", {
+          height: "390",
+          width: "640",
+          videoId: "jxq9tfo5D1E",
+          playerVars: {
+            playsinline: 1,
+          },
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: onPlayerStateChange,
+          },
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 6000);
+          done = true;
+        }
+      }
+
+      function stopVideo() {
+        player.stopVideo();
+      }
+    </script>
+  </div>
+</div>

@@ -11,7 +11,7 @@
     <!--Card content-->
     <mdb-card-body class="px-lg-5 pd-top-min">
       <div class="text-center container-fluid mt-5 mb-5">
-        <img src="./assets/images/scraper/logo_lg.png" height="120" alt="web_scraper_logo"/>
+        <img src="./assets/images/scraper/login.jpg" height="70" alt="web_scraper_logo"/>
       </div>
       <!-- Form -->
       <form
@@ -26,17 +26,17 @@
           <input
             mdbInput
             mdbValidate
-            type="email"
+            type="text"
             id="form8"
             class="form-control"
-            formControlName="email"
-            name="email"
+            formControlName="cardId"
+            name="cardId"
             required
             ngModel
           />
-          <label for="form8">Email</label>
-          <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)"
-            >Email Invalid</mdb-error
+          <label for="form8">ගිණුම් අංකය (කාඩ් අංකය)</label>
+          <mdb-error *ngIf="cardId.invalid && (cardId.dirty || cardId.touched)"
+            >ගිණුම් අංකය අවශ්‍යයි </mdb-error
           >
         </div>
 
@@ -55,9 +55,9 @@
           />
           <mdb-error
             *ngIf="password.invalid && (password.dirty || password.touched)"
-            >Enter Your Password</mdb-error
+            >මුරපදය ඇතුලු කරන්න </mdb-error
           >
-          <label for="materialLoginFormPassword">Password</label>
+          <label for="materialLoginFormPassword">මුරපදය </label>
         </div>
 
         <br>
@@ -66,11 +66,11 @@
         <div class="d-flex text-center justify-content-around">
           <div>
             <!-- Remember me -->
-            <mdb-checkbox>Remember me</mdb-checkbox>
+            <mdb-checkbox>පුරනය මතක තබා ගන්න </mdb-checkbox>
           </div>
           <div>
             <!-- Forgot password -->
-            <a routerLink="/resetpw" style="color:orange; font-weight:bold;">Change Password ?</a>
+            <!-- <a routerLink="/resetpw" style="color:orange; font-weight:bold;">මුරපදය වෙනස් කිරීමට  ?</a> -->
           </div>
         </div>
 
@@ -85,8 +85,21 @@
           mdbWavesEffect
           type="submit"
         >
-          Log in
+        ඇතුලුවන්න
         </button>
+
+             <!-- Sign in button -->
+             <button
+             mdbBtn
+             color="orange"
+             rounded="true"
+             block="true"
+             class="my-4 waves-effect z-depth-0"
+             mdbWavesEffect
+             routerLink="/signup"
+           >
+           නව ගිණුමක් සාදන්න
+           </button>
 
           <br>
           <br>

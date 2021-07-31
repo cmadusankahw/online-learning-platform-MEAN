@@ -1,0 +1,51 @@
+.example-card {
+  max-width: 270px;
+  min-width:270px;
+  margin:10px;
+}
+
+.example-header-image {
+  background-image: url('https://www.pngitem.com/pimgs/m/157-1576340_game-based-learning-png-transparent-cartoons-game-based.png');
+  background-size: cover;
+}
+
+mat-card-content{
+  font-size:18px;
+  font-weight:bold;
+  color:rgb(148, 100, 10);
+  padding-top:15px;
+}
+
+.buttons{
+  text-align: center;
+  display:flex;
+  align-content: center;
+
+}
+
+.card-box{
+  display: flex;
+  align-items: space-around;
+  text-align:center;
+  align-self: center;
+  align-content: space-between;
+
+}
+
+.gr-thumbnail {
+  background: linear-gradient(to right, #ee0979, #ff6a00);
+  height:200px;
+  font-weight:bold;
+  font-size: 40px;
+  color: white;
+  line-height: 200px;
+}
+
+
+@media screen and (max-width: 500px) {
+  .example-card {
+    max-width: 100%;
+    min-width:100%;
+    margin-right:30px;
+  }
+}

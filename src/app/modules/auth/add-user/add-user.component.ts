@@ -3,7 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
-import { User } from '../../scraper/scraper.model';
+import { Student } from '../../student/student.model';
 import { AuthService } from '../auth.service';
 import { MatDialog } from '@angular/material';
 import { ErrorComponent } from 'src/app/error/error.component';
@@ -19,7 +19,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   private lastIdSub: Subscription;
 
-  lastId : string;
+  lastId: string;
 
   constructor(private router: Router,
               public datepipe: DatePipe,
@@ -35,7 +35,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
            console.log( this.lastId);
          }
     });
-    this.router.events.subscribe((evt) => {
+     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
           return;
       }
@@ -50,7 +50,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
   }
 
   confirmPassword(str1, str2){
-    if (str1 == str2) {
+    if (str1 === str2) {
       return true;
     } else {
       return false;
@@ -62,18 +62,24 @@ export class AddUserComponent implements OnInit, OnDestroy {
       console.log('Form Invalid');
     } else {
       if (this.confirmPassword(signupForm.value.user_pass, signupForm.value.user_pass_check)) {
-        const user: User = {
-          userId: this.lastId,
-          userType: signupForm.value.user_type,
-          userName: signupForm.value.user_name,
+        const user: Student = {
+          studentId: this.lastId,
+          studentName: signupForm.value.user_name,
+          user_type:'Student',
           profilePic: './assets/images/scraper/user.png',
-          userEmail: signupForm.value.user_email,
-          userContactNo: signupForm.value.contact_no,
-          status: 'Registered',
-          scrapers: []
+          email: signupForm.value.user_email,
+          contactNo: signupForm.value.contact_no,
+          gender:  signupForm.value.gender,
+          cardId: signupForm.value.cardid,
+          Nic: signupForm.value.nic,
+          class:  signupForm.value.al_class,
+          teacherid: '123',
+          stream:  'any', // get from form if required
+          status:"New",
+          subjects:[]
           };
         this.authService.signUp(user, signupForm.value.user_pass);
-        console.log('User signed up successfully!');
+        console.log('You have signed up successfully!');
         signupForm.resetForm();
       } else {
         this.dialog.open(ErrorComponent, {data: {message: 'Passwords do not match! Pleasec re-check!'}});

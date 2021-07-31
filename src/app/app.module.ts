@@ -47,33 +47,30 @@ import { AddUserComponent } from './modules/auth/add-user/add-user.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
-import { UserProfileComponent } from './modules/scraper/user-profile/user-profile.component';
-import { ContactUsComponent } from './modules/home/contact-us/contact-us.component';
+import { UserProfileComponent } from './modules/student/user-profile/user-profile.component';
 import { NotFoundPageComponent } from './modules/home/not-found-page/not-found-page.component';
 import { AuthInterceptor } from './modules/auth/auth-interceptor';
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { SuccessComponent } from './success/success.component';
-import { DashboardComponent } from './modules/scraper/dash/dashboard/dashboard.component';
-import { DashHomeComponent } from './modules/scraper/dash/pages/dash-home/dash-home.component';
-import { DashDataComponent } from './modules/scraper/dash/pages/dash-data/dash-data.component';
-import { AllUsersComponent } from './modules/admin/all-users/all-users.component';
-import { ScrapersListComponent } from './modules/scraper/scrapers-list/scrapers-list.component';
-import { DashSettingsComponent } from './modules/scraper/dash/pages/dash-settings/dash-settings.component';
+import { DashboardComponent } from './modules/student/dash/dashboard/dashboard.component';
+import { DashHomeComponent } from './modules/student/dash/pages/dash-home/dash-home.component';
+import { DashDataComponent } from './modules/student/dash/pages/dash-data/dash-data.component';
+import { AllUsersComponent } from './modules/teacher/all-users/all-users.component';
+import { DashSettingsComponent } from './modules/student/dash/pages/dash-settings/dash-settings.component';
 import { CreateNewPasswordComponent } from './modules/auth/create-new-password/create-new-password.component';
 import { PasswordResetComponent } from './modules/auth/password-reset/password-reset.component';
 import { HomepageComponent } from './modules/home/homepage/homepage.component';
-import { ScraperDetailsComponent } from './modules/scraper/scraper-details/scraper-details.component';
-import { ScraperDataComponent } from './modules/scraper/scraper-data/scraper-data.component';
-import { AdminDashStatComponent } from './modules/admin/dash/dash-stat/dash-stat.component';
-import { AdminDashboardComponent } from './modules/admin/dash/dashboard/admin-dashboard.component';
-import { AdminHomeComponent } from './modules/admin/dash/pages/admin-home/admin-home.component';
-import { AdminScrapersComponent } from './modules/admin/dash/pages/admin-scrapers/admin-scrapers.component';
-import { AdminSettingsComponent } from './modules/admin/dash/pages/admin-settings/admin-settings.component';
-import { AdminUsersComponent } from './modules/admin/dash/pages/admin-users/admin-users.component';
-import { AdminAddScraperComponent } from './modules/admin/admin-add-scraper/admin-add-scraper.component';
-import { AdminScraperDetailsComponent } from './modules/admin/admin-scraper-details/admin-scraper-details.component';
-
+import { TeacherDashboardComponent } from './modules/teacher/dash/dashboard/teacher-dashboard.component';
+import { TeacherHomeComponent } from './modules/teacher/dash/pages/teacher-home/teacher-home.component';
+import { TeacherSettingsComponent } from './modules/teacher/dash/pages/teacher-settings/teacher-settings.component';
+import { TeacherUsersComponent } from './modules/teacher/dash/pages/teacher-users/teacher-users.component';
+import { TeacherCoursesComponent } from './modules/teacher/dash/pages/teacher-courses/teacher-courses.component';
+import { TeacherAddCourseComponent } from './modules/teacher/teacher-add-course/teacher-add-course.component';
+import { TeacherAddVideosComponent } from './modules/teacher/teacher-add-videos/teacher-add-videos.component';
+import { NewcoursesComponent } from './modules/auth/newcourses/newcourses.component';
+import { NoRightClickDirective } from './no-right-click.directive';
+import { VideoPlayerComponent } from './modules/student/video-player/video-player.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +80,6 @@ import { AdminScraperDetailsComponent } from './modules/admin/admin-scraper-deta
     FooterComponent,
     AddUserComponent,
     UserProfileComponent,
-    ContactUsComponent,
     NotFoundPageComponent,
     ErrorComponent,
     SuccessComponent,
@@ -94,18 +90,17 @@ import { AdminScraperDetailsComponent } from './modules/admin/admin-scraper-deta
     DashHomeComponent,
     DashDataComponent,
     AllUsersComponent,
-    ScrapersListComponent,
     DashSettingsComponent,
-    ScraperDetailsComponent,
-    ScraperDataComponent,
-    AdminDashStatComponent,
-    AdminDashboardComponent,
-    AdminHomeComponent,
-    AdminScrapersComponent,
-    AdminSettingsComponent,
-    AdminUsersComponent,
-    AdminAddScraperComponent,
-    AdminScraperDetailsComponent
+    TeacherHomeComponent,
+    TeacherDashboardComponent,
+    TeacherSettingsComponent,
+    TeacherUsersComponent,
+    TeacherCoursesComponent,
+    TeacherAddCourseComponent,
+    TeacherAddVideosComponent,
+    NewcoursesComponent,
+    NoRightClickDirective,
+    VideoPlayerComponent,
   ],
   imports: [
     BrowserModule,

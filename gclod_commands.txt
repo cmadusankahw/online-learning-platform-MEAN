@@ -1,0 +1,5 @@
+gcloud config set project chemwin-320614
+
+gcloud config set project chemwin-backend
+
+gcloud app deploy
