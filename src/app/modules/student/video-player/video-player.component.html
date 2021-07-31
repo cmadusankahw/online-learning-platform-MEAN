@@ -1,0 +1,75 @@
+<div class="player-content">
+  <div class="video">
+    <!-- <video width="100%" controls (click)="toggleVideo()" #videoPlayer>
+  <source src="{{playlink}}" type="video/mp4" />
+  Browser not supported
+</video>-->
+    <div class="container" *ngIf="vtype == 'y'">
+      <div id="overlay"></div>
+      <div
+        style="
+          position: sticky;
+          padding-top: 56.25%;
+          padding-left: 10em;
+        "
+        appNoRightClick
+        *ngIf="vtype == 'y'"
+      >
+        <iframe
+          style="margin-right: 1%; margin-left: 1%"
+          width="100%"
+          height="500px"
+          [src]="playlink"
+          title="YouTube video player"
+          frameborder="0"
+          loading="lazy"
+          style="
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+          "
+          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+          appNoRightClick
+          fs="0"
+        ></iframe>
+        >
+      </div>
+    </div>
+
+    <!--
+              <div style="position: relative; padding-top: 56.25%;" *ngIf="vtype=='b'"><iframe [src]='playlink' loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe></div>
+-->
+    <div
+      style="position: relative; padding-top: 56.074766355140184%"
+      *ngIf="vtype == 'b'"
+    >
+      <iframe
+        [src]="playlink"
+        loading="lazy"
+        style="
+          border: none;
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: 100%;
+        "
+        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+        allowfullscreen="true"
+      ></iframe>
+    </div>
+    <!--    <div style="position: relative; padding-top: 56.25%;"><iframe src="https://iframe.mediadelivery.net/embed/4858/1c56b1e1-8988-4f58-bea5-cee79c571b88?autoplay=true" loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                  allowfullscreen="true"></iframe></div>
+      </div>
+  </div>
+-->
+
+    <div class="other-details mb-2">
+      <!-- <div class="next-prev">
+                      <button mat-button color="gray">< Previous</button>
+                      <p style=" font-size:38px; color:gray;"> | </p> <button mat-button color="gray">Next > </button>
+                  </div> -->
+    </div>
+  </div>
+</div>

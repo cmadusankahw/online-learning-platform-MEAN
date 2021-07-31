@@ -70,6 +70,7 @@ import { TeacherAddCourseComponent } from './modules/teacher/teacher-add-course/
 import { TeacherAddVideosComponent } from './modules/teacher/teacher-add-videos/teacher-add-videos.component';
 import { NewcoursesComponent } from './modules/auth/newcourses/newcourses.component';
 import { NoRightClickDirective } from './no-right-click.directive';
+import { VideoPlayerComponent } from './modules/student/video-player/video-player.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { NoRightClickDirective } from './no-right-click.directive';
     TeacherAddVideosComponent,
     NewcoursesComponent,
     NoRightClickDirective,
+    VideoPlayerComponent,
   ],
   imports: [
     BrowserModule,

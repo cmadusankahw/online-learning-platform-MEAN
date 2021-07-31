@@ -1,169 +1,186 @@
 <div appNoRightClick>
-    <div *ngIf="cour">
-        <div class="top-content">
-            <div class="mt-3 mb-2 text-center">
-                <h2><strong> වැඩසටහන: {{selected}}</strong></h2>
-            </div>
-            <hr>
+  <div *ngIf="cour">
+    <div class="top-content">
+      <div class="mt-3 mb-2 text-center">
+        <h2>
+          <strong> වැඩසටහන: {{ selected }}</strong>
+        </h2>
+      </div>
+      <hr />
+    </div>
+    <div class="bottom-content row">
+      <div class="col-md-12 course-list">
+
+        <div *ngIf="vtype && playlink">
+          <app-video-player [vtype]="vtype" [playlink]="playlink"></app-video-player>
         </div>
-        <div class="bottom-content row">
 
-            <div class="col-md-12 course-list">
+      </div>
 
-                <div class="player-content">
-                    <div class="video">
+      <div *ngIf="!course" class="mt-5 pt-5 mb-5 text-center">
+        <h2><b>පාථමාලාව තවමත් විවෘතව නැත</b></h2>
+      </div>
+    </div>
+    <div class="row" style="padding-top: 30px">
+      <div class="col-md-8 pb-3">
+        <p style="font-size: 28px; color: gray">තාක්ෂණ සහය | 077 138 51 16</p>
+        <br />
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight"
+        >
+          වීඩියෝව තෝරන්න.
+        </button>
 
-                        <!-- <video width="100%" controls (click)="toggleVideo()" #videoPlayer>
-          <source src="{{playlink}}" type="video/mp4" />
-          Browser not supported
-      </video>-->
-
-                        <div style="position:absolute; padding-top: 56.25%;" appNoRightClick *ngIf="vtype=='y'">
-                            <iframe width="500px" height="300px" [src]='playlink' title="YouTube video player" frameborder="0" loading="lazy" style="border: none; position: absolute; top: 0;left:0;right:0" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                appNoRightClick fs="0"></iframe>
-
-                            <div id="overlay"></div>
-
-                        </div>
-
-
-                        <!--
-                      <div style="position: relative; padding-top: 56.25%;" *ngIf="vtype=='b'"><iframe [src]='playlink' loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe></div>
--->
-                        <div style="position: relative; padding-top: 56.074766355140184%;" *ngIf="vtype=='b'"><iframe [src]="playlink" loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe></div>
-                        <!--    <div style="position: relative; padding-top: 56.25%;"><iframe src="https://iframe.mediadelivery.net/embed/4858/1c56b1e1-8988-4f58-bea5-cee79c571b88?autoplay=true" loading="lazy" style="border: none; position: absolute; top: 0; height: 100%; width: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                          allowfullscreen="true"></iframe></div>
-              </div>
+        <!--another bittonm-->
+        <div
+          class="offcanvas offcanvas-end"
+          tabindex="1"
+          id="offcanvasRight"
+          aria-labelledby="offcanvasRightLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">වීඩියෝව තෝරන්න.</h5>
+            <button
+              type="button"
+              class="btn-close text-reset"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
           </div>
-      -->
-
-                        <div class="other-details mb-2">
-                            <!-- <div class="next-prev">
-                              <button mat-button color="gray">< Previous</button>
-                              <p style=" font-size:38px; color:gray;"> | </p> <button mat-button color="gray">Next > </button>
-                          </div> -->
-                            <p style=" font-size:28px; color:gray;"> තාක්ෂණ සහය | 077 138 31 16 </p>
-
-                        </div>
-
+          <div class="offcanvas-body">
+            <div *ngFor="let video of cour">
+              <mat-card
+                class="now-playing example-card"
+                *ngIf="now_playing_id == video.title"
+              >
+                <mat-card-content>
+                  <div class="row">
+                    <div class="col-md-3 text-center">
+                      <img
+                        mat-card-image
+                        src="./assets/images/scraper/video_icon.png"
+                        class="vid-icon"
+                        alt="Video"
+                      />
                     </div>
-
-                </div>
-
+                    <div class="col-md-8">
+                      <h4>{{ video.title }}</h4>
+                      <p>
+                        <b>ඉගැන්වීම : </b>
+                      </p>
+                      <div class="play-icon pause">
+                        <mdb-icon fas icon="pause"></mdb-icon>
+                        <span style="font-size: 16px"> නවත්වන්න </span>
+                      </div>
+                      <br />
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+              <mat-card
+                class="example-card"
+                *ngIf="now_playing_id != video.title"
+                data-bs-dismiss="offcanvas"
+                appNoRightClick
+                (click)="
+                  selectvideo(
+                    video.link,
+                    video.type,
+                    video.comment,
+                    video.title
+                  )
+                "
+              >
+                <mat-card-content>
+                  <div class="row">
+                    <div class="col-md-3 text-center">
+                      <img
+                        mat-card-image
+                        src="./assets/images/scraper/video_icon.png"
+                        alt="Video"
+                      />
+                    </div>
+                    <div class="col-md-8">
+                      <h5>{{ video.title }}</h5>
+                      <p></p>
+                      <div class="play-icon">
+                        <mdb-icon
+                          fas
+                          icon="play"
+                          (click)="
+                            selectvideo(
+                              video.link,
+                              video.type,
+                              video.comment,
+                              video.title
+                            )
+                          "
+                        ></mdb-icon>
+                        <span style="font-size: 14px"> නරඹන්න </span>
+                      </div>
+                      <br />
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
             </div>
-
-
-
-
-
-            <div *ngIf="!course" class="mt-5 pt-5 mb-5 text-center">
-                <h2><b>පාථමාලාව තවමත් විවෘතව නැත</b></h2>
-            </div>
-
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 pb-3">
-                <div class="buttons">
-                    <button class="button" id="play-button">PLAY</button>
-                    <button class="button" id="pause-button">PAUSE</button>
-                    <button class="button" id="stop-button">STOP</button>
-                </div>
-                <h4 *ngIf="details!=''"><strong> ගුරුවරයාගේ සටහන් </strong></h4>
-                <hr>
-                <p>{{details}}</p>
-            </div>
-            <div class="col-md-4">
-                <div *ngFor="let video of cour">
-                    <mat-card class=" now-playing example-card" *ngIf="now_playing_id == video.title">
-                        <mat-card-content>
-                            <div class="row">
-                                <div class="col-md-3 text-center">
-                                    <img mat-card-image src="./assets/images/scraper/video_icon.png" class="vid-icon" alt="Video">
-                                </div>
-                                <div class="col-md-8">
-                                    <h4>{{video.title}}</h4>
-                                    <p>
-                                        <b>ඉගැන්වීම : </b>
-                                    </p>
-                                    <div class="play-icon pause">
-                                        <mdb-icon fas icon="pause"></mdb-icon>
-                                        <span style="font-size:16px;">
-          නවත්වන්න
-         </span>
-                                    </div>
-                                    <br>
-                                </div>
-                            </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
 
-                        </mat-card-content>
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement("script");
 
-                    </mat-card>
-                    <mat-card class="example-card" *ngIf="now_playing_id != video.title" appNoRightClick (click)="selectvideo(video.link,video.type,video.comment,video.title)">
-                        <mat-card-content>
-                            <div class="row">
-                                <div class="col-md-3 text-center">
-                                    <img mat-card-image src="./assets/images/scraper/video_icon.png" alt="Video">
-                                </div>
-                                <div class="col-md-8">
-                                    <h5>{{video.title}}</h5>
-                                    <p>
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName("script")[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-                                    </p>
-                                    <div class="play-icon">
-                                        <mdb-icon fas icon="play" (click)="selectvideo(video.link,video.type,video.comment,video.title)"></mdb-icon>
-                                        <span style="font-size:14px;">
-          නරඹන්න
-         </span>
-                                    </div>
-                                    <br>
-                                </div>
-                            </div>
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
 
-                        </mat-card-content>
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player("player", {
+          height: "390",
+          width: "640",
+          videoId: "jxq9tfo5D1E",
+          playerVars: {
+            playsinline: 1,
+          },
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: onPlayerStateChange,
+          },
+        });
+      }
 
-                    </mat-card>
-                </div>
-            </div>
-        </div>
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
 
-        <script>
-            // global variable for the player
-            var player;
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
 
-            // this function gets called when API is ready to use
-            function onYouTubePlayerAPIReady() {
-                // create the global player from the specific iframe (#video)
-                player = new YT.Player('video', {
-                    events: {
-                        // call this function when player is ready to use
-                        'onReady': onPlayerReady
-                    }
-                });
-            }
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 6000);
+          done = true;
+        }
+      }
 
-            function onPlayerReady(event) {
-                alert("hi")
-                    // bind events
-                var playButton = document.getElementById("play-button");
-                playButton.addEventListener("click", function() {
-                    player.playVideo();
-                });
-
-                var pauseButton = document.getElementById("pause-button");
-                pauseButton.addEventListener("click", function() {
-                    player.pauseVideo();
-                });
-
-                var stopButton = document.getElementById("stop-button");
-                stopButton.addEventListener("click", function() {
-                    player.stopVideo();
-                });
-
-            }
-
-            // Inject YouTube API script
-            var tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/player_api";
-            var firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        </script>
+      function stopVideo() {
+        player.stopVideo();
+      }
+    </script>
+  </div>
+</div>
