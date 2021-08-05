@@ -35,7 +35,6 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   constructor( private authService: AuthService) { }
 
   ngOnInit() {
-     // get all users
    this.authService.getClassStudents(this.classId);
    this.userSub = this.authService.getClassStudentsUpdatedListener().subscribe(
      res => {

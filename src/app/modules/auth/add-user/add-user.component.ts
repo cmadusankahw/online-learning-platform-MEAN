@@ -21,6 +21,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   lastId: string;
 
+  lastIds = '0';
+
   constructor(private router: Router,
               public datepipe: DatePipe,
               public authService: AuthService,
@@ -44,12 +46,13 @@ export class AddUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.lastIdSub){
+    if (this.lastIdSub) {
+      // tslint:disable-next-line:no-unused-expression
       this.lastIdSub.unsubscribe;
     }
   }
 
-  confirmPassword(str1, str2){
+  confirmPassword(str1, str2) {
     if (str1 === str2) {
       return true;
     } else {
@@ -57,15 +60,33 @@ export class AddUserComponent implements OnInit, OnDestroy {
     }
   }
 
+  lastid() {
+    this.authService.getLastUserId();
+    this.lastIdSub = this.authService.getLastIdUpdateListener()
+      .subscribe((recievedId: string) => {
+        if (recievedId) {
+          this.lastIds = recievedId;
+          console.log( this.lastId);
+        }
+   });
+    this.router.events.subscribe((evt) => {
+     if (!(evt instanceof NavigationEnd)) {
+         return;
+     }
+     window.scrollTo(0, 0);
+ });
+  }
+
    signupUser(signupForm: NgForm) {
+    this.lastid();
     if (signupForm.invalid) {
       console.log('Form Invalid');
     } else {
       if (this.confirmPassword(signupForm.value.user_pass, signupForm.value.user_pass_check)) {
-        const user: Student = {
-          studentId: this.lastId,
+        const user: any = {
+          studentId: this.lastIds,
           studentName: signupForm.value.user_name,
-          user_type:'Student',
+          user_type: 'Student',
           profilePic: './assets/images/scraper/user.png',
           email: signupForm.value.user_email,
           contactNo: signupForm.value.contact_no,
@@ -73,10 +94,9 @@ export class AddUserComponent implements OnInit, OnDestroy {
           cardId: signupForm.value.cardid,
           Nic: signupForm.value.nic,
           class:  signupForm.value.al_class,
-          teacherid: '123',
+          teacherid: 't1',
           stream:  'any', // get from form if required
-          status:"New",
-          subjects:[]
+          subjects: []
           };
         this.authService.signUp(user, signupForm.value.user_pass);
         console.log('You have signed up successfully!');

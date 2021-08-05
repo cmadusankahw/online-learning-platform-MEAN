@@ -299,7 +299,10 @@ removeStudent(userId){
       this.isAuthenticated = true;
       this.setAuthTimer(expiersIn / 1000); // node timers works in secords (not ms)
       this.authStatusListener.next(true);
+    } else{
+      this.clearAuthData();
     }
+
   }
 
 
@@ -342,10 +345,12 @@ removeStudent(userId){
    if (!token || !expiration) {
      return;
    }
+
    return {
      token,
      expiarationDate : new Date(expiration),
    };
+
  }
 
 }
