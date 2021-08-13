@@ -66,7 +66,7 @@ export class AllUsersComponent implements OnInit, OnDestroy {
     const teachersid = teacherid;
     const details = {teacherid: teachersid};
     this.http
-    .post< any >('http://localhost:3000/learn-online/v1/teacher/getstudent/', details)
+    .post< any >('https://chemwin-backend.uc.r.appspot.com/learn-online/v1/teacher/getstudent/', details)
     .subscribe(responseData => {
      
       const datas = responseData;
