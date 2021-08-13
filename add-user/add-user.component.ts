@@ -21,6 +21,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   lastId: string;
 
+  lastIds = '0';
+
   constructor(private router: Router,
               public datepipe: DatePipe,
               public authService: AuthService,
@@ -58,13 +60,31 @@ export class AddUserComponent implements OnInit, OnDestroy {
     }
   }
 
+  lastid() {
+    this.authService.getLastUserId();
+    this.lastIdSub = this.authService.getLastIdUpdateListener()
+      .subscribe((recievedId: string) => {
+        if (recievedId) {
+          this.lastIds = recievedId;
+          console.log( this.lastId);
+        }
+   });
+    this.router.events.subscribe((evt) => {
+     if (!(evt instanceof NavigationEnd)) {
+         return;
+     }
+     window.scrollTo(0, 0);
+ });
+  }
+
    signupUser(signupForm: NgForm) {
+    this.lastid();
     if (signupForm.invalid) {
       console.log('Form Invalid');
     } else {
       if (this.confirmPassword(signupForm.value.user_pass, signupForm.value.user_pass_check)) {
         const user: any = {
-          studentId: this.lastId,
+          studentId: this.lastIds,
           studentName: signupForm.value.user_name,
           user_type: 'Student',
           profilePic: './assets/images/scraper/user.png',

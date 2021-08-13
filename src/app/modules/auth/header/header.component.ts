@@ -34,16 +34,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.headerDetailsSubs = this.authService.getHeaderDetailsListener().subscribe(
       headerDetails => {
         if (headerDetails) {
-          this.headerDetails = headerDetails;
-          this.userIsAuthenticated = this.authService.getisAuth();
-          this.authSubs = this.authService.getAuhStatusListener().subscribe(
-          isAuthenticated => {
-            this.userIsAuthenticated = isAuthenticated;
-          }
-        );
-        }
-      }
-    );
+         this.headerDetails = headerDetails;
+         this.userIsAuthenticated = this.authService.getisAuth();
+         this.authSubs = this.authService.getAuhStatusListener().subscribe(
+       isAuthenticated => {
+           this.userIsAuthenticated = isAuthenticated;
+       }
+      );
+     }
+    }
+  );
 
 
     // hide login and signup button depend on route

@@ -79,6 +79,7 @@ export class AuthService {
     getClassStudents(classId) {
       this.http.get<{users: Student[]}>(url + getClassStudents + classId )
         .subscribe((res) => {
+          console.log(res.users);
           this.studentsUpdated.next(res.users);
       });
     }
@@ -279,7 +280,11 @@ removeStudent(userId){
         const now = new Date();
         const expirationDate = new Date (now.getTime() + recievedData.expiersIn * 1000 );
         this.saveAuthData(recievedData.token, expirationDate );
+        if(recievedData.user_type === 'Student') {
           this.router.navigate(['/student']);
+        }
+      } else{
+        this.router.navigate(['/teacher']);
       }
    }, (error) => {
      console.log(error);

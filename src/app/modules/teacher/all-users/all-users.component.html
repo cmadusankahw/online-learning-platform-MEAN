@@ -1,95 +1,77 @@
 <div class="pd-top-min" *ngIf="users">
-  <h4>
-    <mat-icon>library_books</mat-icon>
-    <b> Registered Users</b>
-  </h4>
+    <h4>
+        <mat-icon>library_books</mat-icon>
+        <b> Registered Users</b>
+    </h4>
 
-  <mat-form-field>
-    <mat-label>
-      <mat-icon>search</mat-icon>
-      Search Users</mat-label
-    >
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Saman" />
-  </mat-form-field>
+    <mat-form-field>
+        <mat-label>
+            <mat-icon>search</mat-icon>
+            Search Users</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Saman" />
+    </mat-form-field>
 
-  <div class="mat-elevation-z8">
-    <table
-      class="table-responsive"
-      mat-table
-      [dataSource]="dataSource"
-      *ngIf="users.length"
-    >
-      <!-- ID Column -->
-      <ng-container matColumnDef="user_id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Student ID</th>
-        <td mat-cell *matCellDef="let row">{{ row.userId }}</td>
-      </ng-container>
+    <div class="mat-elevation-z8">
+        <table class="table-responsive" mat-table [dataSource]="dataSource" *ngIf="users.length">
+            <!-- ID Column -->
+            <ng-container matColumnDef="user_id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Student ID</th>
+                <td mat-cell *matCellDef="let row">{{ row.student[0].cardId }}</td>
+            </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</th>
-        <td mat-cell *matCellDef="let row">
-          {{ row.userName }}
-        </td>
-      </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</th>
+                <td mat-cell *matCellDef="let row">
+                    {{ row.student[0].cardId }}
+                </td>
+            </ng-container>
 
-      <!-- Color Column -->
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-        <td mat-cell *matCellDef="let row">
-          {{ row.userEmail }}
-        </td>
-      </ng-container>
+            <!-- Color Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                <td mat-cell *matCellDef="let row">
+                    {{ row.student[0].cardId }}
+                </td>
+            </ng-container>
 
-      <!-- Color Column -->
-      <ng-container matColumnDef="contact_no">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact No</th>
-        <td mat-cell *matCellDef="let row">
-          {{ row.userContactNo }}
-        </td>
-      </ng-container>
+            <!-- Color Column -->
+            <ng-container matColumnDef="contact_no">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact No</th>
+                <td mat-cell *matCellDef="let row">
+                    {{ row.student[0].cardId }}
+                </td>
+            </ng-container>
 
             <!-- Progress Column -->
             <ng-container matColumnDef="class">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Class</th>
-              <td mat-cell *matCellDef="let row">{{ row.userType }}</td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Class</th>
+                <td mat-cell *matCellDef="let row">{{ row.student[0].cardId }}</td>
             </ng-container>
 
 
-      <!-- Action Column -->
-      <ng-container matColumnDef="action">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          style="text-align: center"
-        >
-          ACTION
-        </th>
-        <td mat-cell *matCellDef="let row">
-          <button
-            mdbBtn
-            color="blue"
-            text="white"
-            class="btn btn-sm text-center"
-            (click)="showUserDetails(row.userId)"
-
-          >
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">
+                    ACTION
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mdbBtn color="blue" text="white" class="btn btn-sm text-center" (click)="showUserDetails(row.userId)">
             View Data
           </button>
-        </td>
-      </ng-container>
+                </td>
+            </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
 
-    <div class="text-center pd-top-min" *ngIf="!users.length">
-      No Users Found
+        <div class="text-center pd-top-min" *ngIf="!users.length">
+            No Users Found
+        </div>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
     </div>
-
-    <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
-  </div>
 </div>
 
 
@@ -285,110 +267,89 @@
 
 
 <!-- confirm order deliveery dialog-->
-<div mdbModal #confirmDialog="mdbModal"
-class="modal fade"
-id="frameModalTop" tabindex="-1" role="dialog"
-[config]="{ backdrop: false, ignoreBackdropClick: true }"
-aria-labelledby="myModalLabel" aria-hidden="true"
- >
-<div class="modal-dialog modal-notify modal-danger modal-dialog-centered" role="document">
-  <!--Content-->
-  <div class="modal-content">
-    <!--Header-->
-    <div class="modal-header">
-      <p class="heading">Remove a User</p>
+<div mdbModal #confirmDialog="mdbModal" class="modal fade" id="frameModalTop" tabindex="-1" role="dialog" [config]="{ backdrop: false, ignoreBackdropClick: true }" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-danger modal-dialog-centered" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading">Remove a User</p>
 
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="confirmDialog.hide()">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="confirmDialog.hide()">
         <span aria-hidden="true" class="white-text">&times;</span>
       </button>
-    </div>
+            </div>
 
-    <!--Body-->
-    <div class="modal-body">
+            <!--Body-->
+            <div class="modal-body">
 
-      <div class="row">
-        <div class="col-3">
-          <p></p>
-          <p class="text-center">
-            <mdb-icon fas icon="ban" size="3x" class="mb-3 animated rotateIn"></mdb-icon>
-          </p>
-        </div>
+                <div class="row">
+                    <div class="col-3">
+                        <p></p>
+                        <p class="text-center">
+                            <mdb-icon fas icon="ban" size="3x" class="mb-3 animated rotateIn"></mdb-icon>
+                        </p>
+                    </div>
 
-        <div class="col-9">
-          <h5>Are you sure want to remove <b>this user</b>? <br> (Please Note: This action is permenent and cannot be undone!)</h5>
-        </div>
-      </div>
-    </div>
+                    <div class="col-9">
+                        <h5>Are you sure want to remove <b>this user</b>? <br> (Please Note: This action is permenent and cannot be undone!)</h5>
+                    </div>
+                </div>
+            </div>
 
-    <!--Footer-->
-    <div class="modal-footer justify-content-center">
-      <a type="button" mdbBtn color="red" class="waves-effect btn btn-md"
-      (click) = "removeUser(user.studentId)"
-      (click)="confirmDialog.hide()"
-      mdbWavesEffect> Remove User
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a type="button" mdbBtn color="red" class="waves-effect btn btn-md" (click)="removeUser(user.studentId)" (click)="confirmDialog.hide()" mdbWavesEffect> Remove User
         <mdb-btn far icon="check" class="ml-1"></mdb-btn>
       </a>
-      <a type="button" mdbBtn color="red" outline="true" class="waves-effect btn btn-md" mdbWavesEffect
-      (click)="confirmDialog.hide()"
-        data-dismiss="modal">not now</a>
+                <a type="button" mdbBtn color="red" outline="true" class="waves-effect btn btn-md" mdbWavesEffect (click)="confirmDialog.hide()" data-dismiss="modal">not now</a>
+            </div>
+        </div>
+        <!--/.Content-->
     </div>
-  </div>
-  <!--/.Content-->
-</div>
 </div>
 
 
 
 <!-- confirm order deliveery dialog-->
-<div mdbModal #confirmDialogUpdate="mdbModal"
-class="modal fade"
-id="frameModalTop" tabindex="-1" role="dialog"
-[config]="{ backdrop: false, ignoreBackdropClick: true }"
-aria-labelledby="myModalLabel" aria-hidden="true"
- >
-<div class="modal-dialog modal-notify modal-primary modal-dialog-centered" role="document">
-  <!--Content-->
-  <div class="modal-content">
-    <!--Header-->
-    <div class="modal-header">
-      <p class="heading">Update Scrapers for User </p>
+<div mdbModal #confirmDialogUpdate="mdbModal" class="modal fade" id="frameModalTop" tabindex="-1" role="dialog" [config]="{ backdrop: false, ignoreBackdropClick: true }" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-primary modal-dialog-centered" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading">Update Scrapers for User </p>
 
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="confirmDialog.hide()">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="confirmDialog.hide()">
         <span aria-hidden="true" class="white-text">&times;</span>
       </button>
-    </div>
+            </div>
 
-    <!--Body-->
-    <div class="modal-body">
+            <!--Body-->
+            <div class="modal-body">
 
-      <div class="row">
-        <div class="col-3">
-          <p></p>
-          <p class="text-center">
-            <mdb-icon fas icon="ban" size="3x" class="mb-3 animated rotateIn"></mdb-icon>
-          </p>
-        </div>
+                <div class="row">
+                    <div class="col-3">
+                        <p></p>
+                        <p class="text-center">
+                            <mdb-icon fas icon="ban" size="3x" class="mb-3 animated rotateIn"></mdb-icon>
+                        </p>
+                    </div>
 
-        <div class="col-9">
-          <h5>Are you sure want to update scrapers for <b>this user</b>? <br> (Please Note: All scrapers removed will loss thier execution data. This action cannot be undone!)</h5>
-        </div>
-      </div>
-    </div>
+                    <div class="col-9">
+                        <h5>Are you sure want to update scrapers for <b>this user</b>? <br> (Please Note: All scrapers removed will loss thier execution data. This action cannot be undone!)</h5>
+                    </div>
+                </div>
+            </div>
 
-    <!--Footer-->
-    <div class="modal-footer justify-content-center">
-      <a type="button" mdbBtn color="primary" class="waves-effect btn btn-md"
-      (click) = "updateUser(user)"
-      (click)="confirmDialogUpdate.hide()"
-      mdbWavesEffect> Commit Changes
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a type="button" mdbBtn color="primary" class="waves-effect btn btn-md" (click)="updateUser(user)" (click)="confirmDialogUpdate.hide()" mdbWavesEffect> Commit Changes
         <mdb-btn far icon="check" class="ml-1"></mdb-btn>
       </a>
-      <a type="button" mdbBtn color="primary" outline="true" class="waves-effect btn btn-md" mdbWavesEffect
-      (click)="confirmDialogUpdate.hide()"
-        data-dismiss="modal">not now</a>
+                <a type="button" mdbBtn color="primary" outline="true" class="waves-effect btn btn-md" mdbWavesEffect (click)="confirmDialogUpdate.hide()" data-dismiss="modal">not now</a>
+            </div>
+        </div>
+        <!--/.Content-->
     </div>
-  </div>
-  <!--/.Content-->
 </div>
-</div>
-

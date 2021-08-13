@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, Input, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { Student } from '../../student/student.model';
@@ -32,20 +32,25 @@ export class AllUsersComponent implements OnInit, OnDestroy {
 
   @Input() classId: string;
 
-  constructor( private authService: AuthService) { }
+  teacherid = 't1';
+
+  constructor( private authService: AuthService , public http: HttpClient) { }
 
   ngOnInit() {
      // get all users
-   this.authService.getClassStudents(this.classId);
-   this.userSub = this.authService.getClassStudentsUpdatedListener().subscribe(
-     res => {
-       if (res) {
-         this.users = res;
-         this.dataSource = new MatTableDataSource(this.users);
-         this.dataSource.paginator = this.paginator;
-         this.dataSource.sort = this.sort;
-      }
-     });
+  // this.authService.getClassStudents(this.teacherid);
+   //this.userSub = this.authService.getClassStudentsUpdatedListener().subscribe(
+   //  res => {
+    //   if (res) {
+     //    this.users = res;
+      //   console.log(this.user );
+      //   alert(this.user);
+      //   this.dataSource = new MatTableDataSource(this.users);
+     //    this.dataSource.paginator = this.paginator;
+    //     this.dataSource.sort = this.sort;
+     // }
+    // });
+    this.getstudent("t1");
   }
 
   ngOnDestroy() {
@@ -54,6 +59,30 @@ export class AllUsersComponent implements OnInit, OnDestroy {
       this.userSub.unsubscribe();
     }
   }
+
+
+  getstudent(teacherid) {
+
+    const teachersid = teacherid;
+    const details = {teacherid: teachersid};
+    this.http
+    .post< any >('http://localhost:3000/learn-online/v1/teacher/getstudent/', details)
+    .subscribe(responseData => {
+     
+      const datas = responseData;
+      const newda = datas.users;
+      console.log(newda);
+      this.dataSource = new MatTableDataSource(newda);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+    });
+
+
+
+
+  }
+
 
 
   applyFilter(event: Event) {
