@@ -11,26 +11,27 @@
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                 වීඩියෝව තෝරන්න.
               </button>
-
+                <p style="font-size: 28px; color: gray">තාක්ෂණ සහය | 077 138 51 16</p>
             </div>
 
 
             <hr />
         </div>
         <div class="bottom-content row">
-            <div class="col-md-12 course-list">
+            <div class="col-md-3 "></div>
+            <div class="col-md-8 course-list">
 
                 <div *ngIf="vtype && playlink">
                     <app-video-player [vtype]="vtype" [playlink]="playlink"></app-video-player>
                 </div>
 
             </div>
-
+            <div class="col-md-1 "></div>
             <div *ngIf="!course" class="mt-5 pt-5 mb-5 text-center">
                 <h2><b>පාථමාලාව තවමත් විවෘතව නැත</b></h2>
             </div>
         </div>
-        <div class="row" style="padding-bottom: 10px">
+        <div class="row">
             <div class="col-md-8 pb-3 mt-5">
 
                 <br />
@@ -38,7 +39,7 @@
 
                 <br>
                 <br>
-                <p style="font-size: 28px; color: gray">තාක්ෂණ සහය | 077 138 51 16</p>
+
 
                 <!--another bittonm-->
                 <div class="offcanvas offcanvas-end" tabindex="1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
