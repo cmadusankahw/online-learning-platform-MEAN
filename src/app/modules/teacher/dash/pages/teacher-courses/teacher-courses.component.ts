@@ -27,7 +27,18 @@ export class TeacherCoursesComponent implements OnInit, OnDestroy {
   private courseSub: Subscription;
 
   // final payments list
-  courses: Course[] = [];
+  courses: Course[] = [
+    {   courseId: 'C1',
+        courseName: '2023 Chemistry',
+        class: 2023,
+        status: 'active', // active/ inactive
+        thumbnail: '2023',
+        teacher: 'ඉදුනිල් අසංක ',
+        commence:'',
+        expire: '',
+        subject: 'Chemistry',
+        videos: []}
+  ];
 
   // recieved state
   @Input() userType = 'serviceProvider';

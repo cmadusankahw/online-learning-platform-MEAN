@@ -18,6 +18,7 @@ import { TeacherUsersComponent } from './modules/teacher/dash/pages/teacher-user
 import { TeacherCoursesComponent } from './modules/teacher/dash/pages/teacher-courses/teacher-courses.component';
 import { TeacherAddVideosComponent } from './modules/teacher/teacher-add-videos/teacher-add-videos.component';
 import { TeacherAddCourseComponent } from './modules/teacher/teacher-add-course/teacher-add-course.component';
+import { AllUsersComponent } from './modules/teacher/all-users/all-users.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'add-course', component: TeacherAddCourseComponent },
       { path: 'add-video/:id', component: TeacherAddVideosComponent },
       { path: 'courses', component: TeacherCoursesComponent },
+      { path: 'students/:id', component: AllUsersComponent },
       { path: 'users', component: TeacherUsersComponent },
       { path: 'settings', component: TeacherSettingsComponent },
       { path: '**', component: NotFoundPageComponent },
