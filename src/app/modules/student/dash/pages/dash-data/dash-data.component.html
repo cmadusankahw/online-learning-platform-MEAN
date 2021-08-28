@@ -8,7 +8,7 @@
             </div>
 
             <div class="mt-3 mb-2 text-center">
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <button class="btn btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                 වීඩියෝව තෝරන්න.
               </button>
                 <p style="font-size: 28px; color: gray">තාක්ෂණ සහය | 077 138 51 16</p>
@@ -45,7 +45,7 @@
                 <div class="offcanvas offcanvas-end" tabindex="1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                     <div class="offcanvas-header">
                         <h5 id="offcanvasRightLabel">වීඩියෝව තෝරන්න.</h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        <button type="button" class="btn-close text-reset btn btn-warning" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
                         <div *ngFor="let video of cour">
@@ -53,7 +53,7 @@
                                 <mat-card-content>
                                     <div class="row">
                                         <div class="col-md-3 text-center">
-                                            <img mat-card-image src="./assets/images/scraper/video_icon.png" class="vid-icon" alt="Video" />
+                                            <img mat-card-image src="./assets/images/scraper/thumbnail.png" class="vid-icon" alt="Video" />
                                         </div>
                                         <div class="col-md-8">
                                             <h4>{{ video.title }}</h4>
@@ -80,10 +80,10 @@
                                 <mat-card-content>
                                     <div class="row">
                                         <div class="col-md-3 text-center">
-                                            <img mat-card-image src="./assets/images/scraper/video_icon.png" alt="Video" />
+                                            <img mat-card-image src="./assets/images/scraper/videoico.png" alt="Video" />
                                         </div>
                                         <div class="col-md-8">
-                                            <h5>{{ video.title }}</h5>
+                                            <h6>{{ video.title }}</h6>
                                             <p></p>
                                             <div class="play-icon">
                                                 <mdb-icon fas icon="play" (click)="

@@ -1,6 +1,6 @@
 
-import { Component, OnInit, ViewChild, Input, OnDestroy } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild, Input, OnDestroy, AfterViewInit } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { HttpClient } from '@angular/common/http';
@@ -8,77 +8,71 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { Student } from '../../student/student.model';
 import { ActivatedRoute } from '@angular/router';
-
+import { TeachersService } from '../../teacher/teachers.service';
+import {FormControl, Validators} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-all-users',
   templateUrl: './all-users.component.html',
   styleUrls: ['./all-users.component.scss']
 })
-export class AllUsersComponent implements OnInit, OnDestroy {
+export class AllUsersComponent implements OnInit, OnDestroy, AfterViewInit {
 
   displayedColumns: string[] = ['user_id', 'card_id', 'name','class','status', 'action'];
   dataSource: MatTableDataSource<Student>;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+ // @ViewChild(MatPaginator, { static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
+  ngAfterViewInit() {
+  
+   
+  }
   // subscritions
+  // tslint:disable-next-line:member-ordering
   private userSub: Subscription;
+  // tslint:disable-next-line:member-ordering
   private routeSub: Subscription;
-
+students:any[];
+users:any[]=[];
+isedit=true;
+ usercard:string;
   // final merchants list
-  users: Student[] = [
-    {
-      studentId: 'S1',
-      studentName: 'Test Student',
-      user_type: 'student',
-      profilePic: 'https://cahsi.utep.edu/wp-content/uploads/kisspng-computer-icons-user-clip-art-user-5abf13db5624e4.1771742215224718993529.png',
-      email: 'test@gmail.com',
-      contactNo: '0772345678',
-      gender: 'Male',
-      cardId: 'C001',
-      Nic: '9876789V',
-      class: 2023,
-      teacherid: 't1',
-      stream: 'Science',
-      subjects: ['Chemistry'],
-      status:'active'
-    }
-  ];
+selectedstatus='deactive';
 
-  user: Student;
+  usersss: any[];
+  // tslint:disable-next-line:member-ordering
 
-  payments = [
-    {month:'Jan', amount:2000},
-    {month:'Feb', amount:2000}
-  ]
+  user:Student;
 
+  
+
+  // tslint:disable-next-line:member-ordering
   @Input() classId: string;
 
   teacherid = 't1';
 
-  constructor( private authService: AuthService , public http: HttpClient,private route: ActivatedRoute) { }
+  // tslint:disable-next-line:max-line-length
+  constructor( private authService: AuthService , public http: HttpClient,private route: ActivatedRoute, private teacherservices: TeachersService,) { }
 
   ngOnInit() {
+  
+ 
     this.routeSub = this.route.params.subscribe(params => {
       console.log(params['id']) //log the value of id
       this.classId = params['id'];
+ 
+     
+
     });
-     // get all users
-  // this.authService.getClassStudents(this.teacherid);
-   //this.userSub = this.authService.getClassStudentsUpdatedListener().subscribe(
-   //  res => {
-    //   if (res) {
-     //    this.users = res;
-      //   console.log(this.user );
-      //   alert(this.user);
-        this.dataSource = new MatTableDataSource(this.users);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-     // }
-    // });
-    // this.getstudent("t1");
+    this.getdata();
+
   }
+
+
+
+
 
   ngOnDestroy() {
 
@@ -92,38 +86,93 @@ export class AllUsersComponent implements OnInit, OnDestroy {
   }
 
 
-  getstudent(teacherid) {
+  getdata(){
+    this.teacherservices.getStudentlist('t1');
+    this.userSub = this.teacherservices.getClassStudentsUpdatedListener()
+       .subscribe((res) => {
+        console.log(res);
+        if (res) {
 
-    const teachersid = teacherid;
-    const details = {teacherid: teachersid};
-    this.http
-    .post< any >('https://chemwin-backend.uc.r.appspot.com/learn-online/v1/teacher/getstudent/', details)
-    .subscribe(responseData => {
-
-      const datas = responseData;
-      const newda = datas.users;
-      console.log(newda);
-      this.dataSource = new MatTableDataSource(newda);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-
-    });
+        
+          console.log(res);
+          
+this.users.length = 0
+           // this.users.push(res);
+          res.map(std => this.users.push(std));
+         
+          this.dataSource = new MatTableDataSource(this.users);
+          
+          if(this.dataSource){this.dataSource.paginator = this.paginator;}
+         
+          this.dataSource.sort = this.sort;
+          console.log(this.users);
+            }
+       }, (error) => {
+        console.log(error);
+      });
   }
 
 
+
+updateallstudent(status){
+ let teacher= this.teacherid;
+let update;
+  this.teacherservices.updateallusers(teacher,status);
+    update = this.teacherservices.getstatussUpdatedListener()
+       .subscribe((res) => { 
+         console.log(res)
+if(res ==='1'){
+  alert("updated");
+  this.getdata();
+  
+}else{
+  alert("Sorry Not Updated")
+}
+
+       });
+
+}
+
+
+updateuserstatus(status,studnetid){
+  if(status==="active"){
+    status="deative";
+  }else{
+    status="active";
+  }
+  let teacher= this.teacherid;
+ let update;
+   this.teacherservices.updatestatus(teacher,status,studnetid);
+     update = this.teacherservices.getstatussUpdatedListener()
+        .subscribe((res) => { 
+          console.log(res)
+ if(res ==='1'){
+   alert("updated");
+   this.getdata();
+   
+ }else{
+   alert("Sorry Not Updated")
+ }
+ 
+        });
+ 
+ }
+ 
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    this.dataSource.paginator.firstPage();
     }
   }
 
 
   // get selected scraper run details
-  showUserDetails(userId: string) {
+  showUserDetails(userId: string , status: string) {
+    this.selectedstatus = status;
+    
     for (const app of this.users) {
       if (app.studentId === userId) {
         this.user = app;
@@ -142,7 +191,34 @@ export class AllUsersComponent implements OnInit, OnDestroy {
       this.authService.updateSlectedStudent(user);
     }
 
+ edituser(){
+  this.isedit=false;
 
+ }
 
+ updateUserData(userForm:NgForm){
+  // alert(userForm.value.usercardid);
+ //  alert(userForm.value.contatctNo);
+  // alert(this.user.studentId)
+   let updateData;
+
+   this.teacherservices.updateuserdetais(this.user.studentId,userForm.value.contatctNo,userForm.value.usercardid);
+   updateData = this.teacherservices.userdataupdateListener()
+      .subscribe((res) => { 
+        console.log(res)
+if(res ==='1'){
+ alert("updated");
+ this.getdata();
+ 
+}else{
+ alert("Sorry Not Updated")
+}
+
+      });
+
+ }
+
+ 
 
 }
+

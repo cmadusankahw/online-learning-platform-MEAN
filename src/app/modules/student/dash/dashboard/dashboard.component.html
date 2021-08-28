@@ -1,40 +1,27 @@
+<app-header>
+
+</app-header>
+
 <mat-sidenav-container appNoRightClick class="sidenav-container">
-  <mat-sidenav
-    #drawer
-    class="sidenav"
-    fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
-  >
-    <!--profile pic-->
-    <div class="pd-img">
-      <img
-        [src]="topIcon"
-        alt="headerDetails Pic"
-        class="img-thumbnail"
-      />
-    </div>
-
-    <mat-nav-list>
-      <a
-        class="txt-white row"
-        mat-list-item
-        [ngClass]="home"
-        (click)="navHome()"
-        routerLink="/student"
-      >
-        <div class="col-md-11 side-start">
-          <mat-icon>policy</mat-icon>
-          <span class="side-text"> ඇතුළත්වූ පාඨමාලා </span>
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <!--profile pic-->
+        <div class="pd-img">
+            <img [src]="topIcon" alt="headerDetails Pic" class="img-thumbnail" />
         </div>
-        <div class="ol-md-1 side-end">
-          <mat-icon>arrow_right</mat-icon>
-        </div>
-      </a>
+
+        <mat-nav-list>
+            <a class="txt-white row" mat-list-item [ngClass]="home" (click)="navHome()" routerLink="/student">
+                <div class="col-md-11 side-start">
+                    <mat-icon>policy</mat-icon>
+                    <span class="side-text"> ඇතුළත්වූ පාඨමාලා </span>
+                </div>
+                <div class="ol-md-1 side-end">
+                    <mat-icon>arrow_right</mat-icon>
+                </div>
+            </a>
 
 
-<!--
+            <!--
       <a
         class="txt-white row"
         mat-list-item
@@ -50,32 +37,33 @@
           <mat-icon>arrow_right</mat-icon>
         </div>
       </a> -->
+            <div class="footer-copyright text-center py-3 header-contents" style="color: rgb(255, 253, 253)">
+                © 2021 Copyright:
+                <a href="http://www.accseedd.com">
+      Accseedd.com</a
+    >
+  </div>
 
 
-    </mat-nav-list>
-  </mat-sidenav>
+        </mat-nav-list>
+    </mat-sidenav>
 
-  <!--dashboard content-->
-  <mat-sidenav-content>
-    <mat-toolbar color="bg-primary" style="color:ornage;">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-      >
+    <!--dashboard content-->
+    <mat-sidenav-content>
+        <mat-toolbar color="bg-primary" style="color:ornage;">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         <b>
           සියලු විස්තර
         </b>
 
       </button>
-    </mat-toolbar>
+        </mat-toolbar>
 
-    <!--dashboard content-->
-    <div class="container-fluid">
-      <router-outlet></router-outlet>
-    </div>
-    <!--end dashboard content-->
-  </mat-sidenav-content>
+        <!--dashboard content-->
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
+        <!--end dashboard content-->
+    </mat-sidenav-content>
 </mat-sidenav-container>

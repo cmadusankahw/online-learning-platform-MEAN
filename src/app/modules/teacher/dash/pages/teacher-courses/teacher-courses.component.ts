@@ -33,11 +33,21 @@ export class TeacherCoursesComponent implements OnInit, OnDestroy {
         class: 2023,
         status: 'active', // active/ inactive
         thumbnail: '2023',
-        teacher: 'ඉදුනිල් අසංක ',
+        teacher: 'Namal ',
         commence:'',
         expire: '',
         subject: 'Chemistry',
-        videos: []}
+        videos: []},
+        {   courseId: 'C1',
+          courseName: '2023 Chemistry',
+          class: 2023,
+          status: 'active', // active/ inactive
+          thumbnail: '2023',
+          teacher: 'Anuska ',
+          commence:'',
+          expire: '',
+          subject: 'Chemistry',
+          videos: []}
   ];
 
   // recieved state

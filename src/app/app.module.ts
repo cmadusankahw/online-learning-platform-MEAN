@@ -71,7 +71,7 @@ import { TeacherAddVideosComponent } from './modules/teacher/teacher-add-videos/
 import { NewcoursesComponent } from './modules/auth/newcourses/newcourses.component';
 import { NoRightClickDirective } from './no-right-click.directive';
 import { VideoPlayerComponent } from './modules/student/video-player/video-player.component';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
@@ -147,6 +147,7 @@ import { VideoPlayerComponent } from './modules/student/video-player/video-playe
     DragDropModule,
     NgbProgressbarModule,
     MatTabsModule,
+    FlexLayoutModule 
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [

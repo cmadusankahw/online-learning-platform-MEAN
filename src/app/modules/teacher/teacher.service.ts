@@ -93,7 +93,7 @@ export class TeacherService {
           userName: recievedHeader.user_name,
           profilePic: recievedHeader.profile_pic};
         this.headerDetailsListener.next(this.headerDetails);
-    });
+    }); 
     }
   }
 

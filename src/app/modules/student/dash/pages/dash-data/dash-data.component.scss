@@ -14,7 +14,7 @@
 }
 
 .offcanvas-header {
-    margin-top: 100px;
+    margin-top: 90px;
 }
 
 .player-content {
@@ -207,6 +207,11 @@ mat-card-content {
 
 .video {
     width: 100%;
+}
+
+.example-card {
+    border: 1px solid #faae0b;
+    border-radius: 10px !important;
 }
 
 .next-prev {

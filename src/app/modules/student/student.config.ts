@@ -1,5 +1,5 @@
-const url: string = "https://chemwin-backend.uc.r.appspot.com/learn-online/v1/";
-//const url: string = 'http://localhost:3000/learn-online/v1/';
+//const url: string = "https://chemwin-backend.uc.r.appspot.com/learn-online/v1/";
+const url: string = 'http://localhost:3000/learn-online/v1/';
 
 const getStudent = 'auth/student/one'; // userId
 const getAuthStudent = 'auth/student/current'; // userId
@@ -13,7 +13,11 @@ const postSignUp = 'auth/signup';
 const postUploadImage = 'auth/student/image'
 const putUpdateStudent = 'auth/student/one'; // current userId
 const putUpdateSelectedStudent = 'auth/student/selected'; // current userId
-const deleteStudent = "auth/student/one/" // given userId
+const deleteStudent = 'auth/student/one/'; // given userId
+const getstuentlist = 'teacher/getstudent/';
+const updateallstatus='teacher/updateallstatus';
+const updatestudent='teacher/updatestatus';
+const updateonestudent='teacher/updatemobilecard';
 
 export {
   url,
@@ -28,5 +32,10 @@ export {
   postUploadImage,
   putUpdateStudent,
   putUpdateSelectedStudent,
-  deleteStudent
+  deleteStudent,
+  getstuentlist,
+  updateallstatus,
+  updatestudent,
+  updateonestudent
+
 };

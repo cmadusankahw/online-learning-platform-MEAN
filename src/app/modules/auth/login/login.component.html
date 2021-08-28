@@ -1,129 +1,72 @@
 <!-- Material form login -->
 
 <div class="login-scr">
-  <mdb-card>
-    <!-- <mdb-card-header class="green text-center white-text py-4">
+    <mdb-card>
+        <!-- <mdb-card-header class="green text-center white-text py-4">
       <h5>
         <b>Sign in</b>
       </h5>
     </mdb-card-header> -->
 
-    <!--Card content-->
-    <mdb-card-body class="px-lg-5 pd-top-min">
-      <div class="text-center container-fluid mt-5 mb-5">
-        <img src="./assets/images/scraper/login.jpg" height="70" alt="web_scraper_logo"/>
-      </div>
-      <!-- Form -->
-      <form
-        [formGroup]="loginForm"
-        style="color: #757575"
-        (submit)="loginUser(loginform)"
-        #loginform="ngForm"
-      >
-        <!-- Email -->
-        <div class="md-form">
-          <mdb-icon fas icon="envelope" class="prefix"></mdb-icon>
-          <input
-            mdbInput
-            mdbValidate
-            type="text"
-            id="form8"
-            class="form-control"
-            formControlName="cardId"
-            name="cardId"
-            required
-            ngModel
-          />
-          <label for="form8">ගිණුම් අංකය (කාඩ් අංකය)</label>
-          <mdb-error *ngIf="cardId.invalid && (cardId.dirty || cardId.touched)"
-            >ගිණුම් අංකය අවශ්‍යයි </mdb-error
-          >
-        </div>
+        <!--Card content-->
+        <mdb-card-body class="px-lg-5 pd-top-min">
+            <div class="text-center container-fluid mt-5 mb-5">
+                <img src="./assets/images/scraper/login.jpg" height="70" alt="web_scraper_logo" />
+            </div>
+            <!-- Form -->
+            <form [formGroup]="loginForm" style="color: #757575" (submit)="loginUser(loginform)" #loginform="ngForm">
+                <!-- Email -->
+                <div class="md-form">
+                    <mdb-icon fas icon="envelope" class="prefix"></mdb-icon>
+                    <input mdbInput mdbValidate type="text" id="form8" class="form-control" formControlName="cardId" name="cardId" required ngModel />
+                    <label for="form8">ගිණුම් අංකය (කාඩ් අංකය)</label>
+                    <mdb-error *ngIf="cardId.invalid && (cardId.dirty || cardId.touched)">ගිණුම් අංකය අවශ්‍යයි </mdb-error>
+                </div>
 
-        <!-- Password -->
-        <div class="md-form">
-          <mdb-icon fas icon="key" class="prefix"></mdb-icon>
-          <input
-            type="password"
-            id="materialLoginFormPassword"
-            class="form-control"
-            mdbInput
-            required
-            formControlName="password"
-            name="password"
-            ngModel
-          />
-          <mdb-error
-            *ngIf="password.invalid && (password.dirty || password.touched)"
-            >මුරපදය ඇතුලු කරන්න </mdb-error
-          >
-          <label for="materialLoginFormPassword">මුරපදය </label>
-        </div>
+                <!-- Password -->
+                <div class="md-form">
+                    <mdb-icon fas icon="key" class="prefix"></mdb-icon>
+                    <input type="password" id="materialLoginFormPassword" class="form-control" mdbInput required formControlName="password" name="password" ngModel />
+                    <mdb-error *ngIf="password.invalid && (password.dirty || password.touched)">මුරපදය ඇතුලු කරන්න </mdb-error>
+                    <label for="materialLoginFormPassword">මුරපදය </label>
+                </div>
 
-        <br>
-        <br>
+                <br>
+                <br>
 
-        <div class="d-flex text-center justify-content-around">
-          <div>
-            <!-- Remember me -->
-            <mdb-checkbox>පුරනය මතක තබා ගන්න </mdb-checkbox>
-          </div>
-          <div>
-            <!-- Forgot password -->
-            <!-- <a routerLink="/resetpw" style="color:orange; font-weight:bold;">මුරපදය වෙනස් කිරීමට  ?</a> -->
-          </div>
-        </div>
+                <div class="d-flex text-center justify-content-around">
+                    <div>
+                        <!-- Remember me -->
 
-        <!-- Sign in button -->
-        <button
-          mdbBtn
-          color="orange"
-          outline="true"
-          rounded="true"
-          block="true"
-          class="my-4 waves-effect z-depth-0"
-          mdbWavesEffect
-          type="submit"
-        >
+                    </div>
+                    <div>
+                        <!-- Forgot password -->
+                        <!--     <a routerLink="/resetpw" style="color:orange; font-weight:bold;">මුරපදය වෙනස් කිරීමට  ?</a>-->
+                    </div>
+                </div>
+
+                <!-- Sign in button -->
+                <button mdbBtn color="orange" outline="true" rounded="true" block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit">
         ඇතුලුවන්න
         </button>
 
-             <!-- Sign in button -->
-             <button
-             mdbBtn
-             color="orange"
-             rounded="true"
-             block="true"
-             class="my-4 waves-effect z-depth-0"
-             mdbWavesEffect
-             routerLink="/signup"
-           >
+                <!-- Sign in button -->
+                <button mdbBtn color="orange" rounded="true" block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect routerLink="/signup">
            නව ගිණුමක් සාදන්න
            </button>
 
-          <br>
-          <br>
-          <br>
-      </form>
-      <!-- Form -->
-    </mdb-card-body>
-  </mdb-card>
+                <br>
 
-  <div
-    class="alert alert-danger alert-dismissible fade show alert-cls"
-    role="alert"
-    *ngIf="showAlert"
-  >
-    Username or Password is incorrect!
-    <button
-      type="button"
-      class="close"
-      data-dismiss="alert"
-      aria-label="Close"
-      (click)="showAlert = !showAlert"
-    >
+            </form>
+            <!-- Form -->
+        </mdb-card-body>
+    </mdb-card>
+
+    <div class="alert alert-danger alert-dismissible fade show alert-cls" role="alert" *ngIf="showAlert">
+        Username or Password is incorrect!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="showAlert = !showAlert">
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>
-  <!-- Material form login -->
+    </div>
+    <!-- Material form login -->
 </div>

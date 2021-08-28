@@ -1,30 +1,29 @@
 <div class="mt-4 mb-2 text-center">
-  <h4>{{courses[0].teacher}} විසින් උගන්වනු  ලබන පාඨමාලා </h4>
+    <h4> උගන්වනු ලබන පාඨමාලා </h4>
 </div>
 <hr>
-<div class = "mt-4"  style="width:60%;">
-  <mat-accordion>
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false" *ngFor="let class of courses">
-      <mat-expansion-panel-header>
-        <mat-panel-title class="mt-2 mb-2">
-          <h5 class="ml-4"><b> {{class.courseName}}</b></h5>
-        </mat-panel-title>
-      </mat-expansion-panel-header >
-      <div class="pt-2 pb-2 row">
-        <div class="col-md-8 ml-4">
-          <p>Thought By: {{class.teacher}}</p>
-          <p>Subject: {{class.subject}}</p>
-        </div>
-        <div class="col-md-3" style="text-align:right;">
-          <button class="btn btn-primary" type="button"
-          data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
-          routerLink="/teacher/students/{{class.courseId}}">
+<div class="mt-4" style="width:60%;">
+    <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngFor="let class of courses">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="mt-2 mb-2">
+                    <h5 class="ml-4"><b> {{class.courseName}}</b></h5>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="pt-2 pb-2 row">
+                <div class="col-md-8 ml-4">
+                    <p>Thought By: {{class.teacher}}</p>
+                    <p>Subject: {{class.subject}}</p>
+                </div>
+                <div class="col-md-3" style="text-align:right;">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" routerLink="/teacher/students/{{class.courseId}}">
             සිසුන්ගේ විස්තර
           </button>
-        </div>
+                </div>
 
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <br>
 </div>

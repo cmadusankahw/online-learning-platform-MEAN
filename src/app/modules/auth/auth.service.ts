@@ -266,7 +266,7 @@ removeStudent(userId){
                      expiersIn: number,
                      user_type: string }>(url + postSignIn , login)
     .subscribe((recievedData) => {
-      console.log(recievedData.message);
+      console.log(recievedData);
 
       this.setAuthTimer(recievedData.expiersIn);
 
@@ -282,10 +282,16 @@ removeStudent(userId){
         this.saveAuthData(recievedData.token, expirationDate );
         if(recievedData.user_type === 'Student') {
           this.router.navigate(['/student']);
+        //  this.router.navigate(['/student']);
+        
         }
-      } else{
+       else {
+      
         this.router.navigate(['/teacher']);
+
+       // this.router.navigateByUrl('/teacher/users');
       }
+    }
    }, (error) => {
      console.log(error);
    });

@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router, NavigationStart } from '@angular/router';
+import { AuthService } from 'src/app/modules/auth/auth.service';
 
 @Component({
   selector: 'app-teacher-dashboard',
@@ -27,7 +28,7 @@ export class TeacherDashboardComponent implements OnInit {
    );
 
  constructor(private breakpointObserver: BreakpointObserver,
-             private router: Router) { }
+             private router: Router,private authService: AuthService,) { }
 
  ngOnInit() {
    this.routerEvents();
@@ -69,6 +70,13 @@ export class TeacherDashboardComponent implements OnInit {
  navCourses() {
   this.courses = 'txt-white row active-nav';
   this.users = this.settings =this.home  = 'txt-white row';
+}
+
+
+onSignOut() {
+ 
+  this.authService.signOut();
+  this.router.navigate(['/']);
 }
 
 }

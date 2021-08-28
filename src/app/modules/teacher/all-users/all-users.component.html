@@ -1,105 +1,117 @@
 <div class="pd-top-min mb-3" *ngIf="users">
     <h4>
         <mat-icon>library_books</mat-icon>
-        <b>{{users[0].class}} පාඨමාලාවට ඇතුළත්වූ සිසුන්  </b>
+        <b> පාඨමාලාවට ඇතුළත්වූ සිසුන්  </b>
     </h4>
     <hr>
 
     <div class="row mt-3">
-      <div class="col-md-4 mt-3 mb-3">
-        <mat-form-field>
-          <mat-label>
-              <mat-icon>search</mat-icon>
-              සිසුන් සෙවීම් කරන්න   </mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. සිසුවාගේ නම හෝ හැදුනුම්පත් අංකය ඇතුළත් කරන්න " />
-      </mat-form-field>
-      </div>
-      <div class="col-md-4 mt-3 mb-3">
-        <mat-form-field appearance="fill">
-          <mat-label>සිසුවාගේ පංතිය මගින් සෙවීම් කරන්න </mat-label>
-          <mat-select>
-            <mat-option  [value]="2023">
-              {{2023}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col-md-4">
-        <div class="row">
-          <div class="col">
-            <span class="pt-4 ml-3"> සියලු සිසුන්: </span>
-            <button mdbBtn color="green" text="white" class="btn btn-md text-center mt-4" >
+        <div class="col-md-4 mt-3 mb-3">
+            <mat-form-field>
+                <mat-label>
+                    <mat-icon>search</mat-icon>
+                    සිසුන් සෙවීම් කරන්න </mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. සිසුවාගේ නම හෝ හැදුනුම්පත් අංකය ඇතුළත් කරන්න " />
+            </mat-form-field>
+        </div>
+        <div class="col-md-4 mt-3 mb-3">
+            <mat-form-field appearance="fill">
+                <mat-label>සිසුවාගේ පංතිය මගින් සෙවීම් කරන්න </mat-label>
+                <mat-select>
+                    <mat-option [value]="2023">
+                        {{2023}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col">
+                    <span class="pt-4 ml-3"> සියලු සිසුන්: </span>
+                    <button mdbBtn color="green" text="white" class="btn btn-md text-center mt-4" (click)="updateallstudent('active')">
                සක්රීය කරන්න
           </button>
-          <button mdbBtn color="red" text="white" class="btn btn-md text-center ml-2 mt-4" >
+                    <button mdbBtn color="red" text="white" class="btn btn-md text-center ml-2 mt-4" (click)="updateallstudent('deactive')">
              අක්රීය කරන්න
         </button>
-          </div>
+                </div>
+                <div class="col">
+                    <span class="pt-4 ml-3"> සියලු සිසුන්: </span>
+                    <button mdbBtn color="blue" text="white" class="btn btn-md text-center ml-2 mt-4">
+                        {{users.length}}
+                   </button>
+                </div>
+
+
+            </div>
         </div>
-      </div>
     </div>
+    <br>
+    <div>
+        <div class="mat-elevation-z8">
+            <table class="table-responsive" mat-table [dataSource]="dataSource">
+                <!-- ID Column -->
+
+                <ng-container matColumnDef="user_id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>සිසුවාගේ අංකය </th>
+                    <td mat-cell *matCellDef="let row">{{ row.studentId }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="card_id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>කාඩ්පත් අංකය </th>
+                    <td mat-cell *matCellDef="let row">{{ row.cardId }}</td>
+                </ng-container>
 
 
-    <div class="mat-elevation-z8">
-        <table class="table-responsive" mat-table [dataSource]="dataSource" *ngIf="users.length">
-            <!-- ID Column -->
-
-            <ng-container matColumnDef="user_id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>සිසුවාගේ අංකය </th>
-                <td mat-cell *matCellDef="let row">{{ row.studentId }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="card_id">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>කාඩ්පත් අංකය  </th>
-              <td mat-cell *matCellDef="let row">{{ row.cardId }}</td>
-          </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>සිසුවාගේ නම</th>
+                    <td mat-cell *matCellDef="let row">
+                        {{ row.studentName }}
+                    </td>
+                </ng-container>
 
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>සිසුවාගේ නම</th>
-                <td mat-cell *matCellDef="let row">
-                    {{ row.studentName }}
-                </td>
-            </ng-container>
+                <!-- Progress Column -->
+                <ng-container matColumnDef="class">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>ජා. හැ. ප. අංකය </th>
+                    <td mat-cell *matCellDef="let row">{{ row.Nic }}</td>
+                </ng-container>
 
-
-            <!-- Progress Column -->
-            <ng-container matColumnDef="class">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>ජා. හැ. ප. අංකය </th>
-                <td mat-cell *matCellDef="let row">{{ row.Nic }}</td>
-            </ng-container>
-
-               <!-- Progress Column -->
-               <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>වත්මන් තත්වය  </th>
-                <td mat-cell *matCellDef="let row">{{ row.status == "active" ? "සක්රීය සිසුවකු" : "අක්රීය සිසුවකු" }}</td>
-            </ng-container>
+                <!-- Progress Column -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>වත්මන් තත්වය </th>
+                    <td mat-cell *matCellDef="let row">{{ row.status === "active" ? "සක්රීය සිසුවකු" : "අක්රීය සිසුවකු" }}</td>
+                </ng-container>
 
 
 
-            <!-- Action Column -->
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">
-                  වැඩි විස්තර
-                </th>
-                <td mat-cell *matCellDef="let row">
-                    <button mdbBtn color="blue" text="white" class="btn btn-sm text-center" (click)="showUserDetails(row.studentId)"
-                    (click)="idOptions.show()">
+                <!-- Action Column -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center">
+                        වැඩි විස්තර
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mdbBtn color="blue" text="white" class="btn btn-sm text-center" (click)="showUserDetails(row.studentId,row.status)" (click)="idOptions.show()">
                       සැකසුම් කරන්න
           </button>
-                </td>
-            </ng-container>
+                    </td>
+                </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
 
-        <div class="text-center pd-top-min" *ngIf="!users.length">
-          සිසුන් කිසිවකුත් පාඔමාලාවට තවමත් ලියාපදිංචි වී නොමැත
+
+            <mat-paginator [pageSizeOptions]="[ 50, 100,500,1000]" showFirstLastButtons aria-label="Select page of periodic elements">
+            </mat-paginator>
+            <div class="text-center pd-top-min" *ngIf="!users.length">
+                සිසුන් කිසිවකුත් පාඔමාලාවට තවමත් ලියාපදිංචි වී නොමැත
+            </div>
+
+
         </div>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
     </div>
 </div>
 
@@ -107,179 +119,149 @@
 
 
 <!--View Details Modal-->
- <div
-  mdbModal
-  #idOptions="mdbModal"
-  class="modal fade"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myBasicModalLabel"
-  [config]="{ backdrop: false, ignoreBackdropClick: true }"
-  aria-hidden="true"
->
-  <div
-    class="modal-dialog modal-lg modal-dialog-centered"
-    role="document"
-    style="overflow-y: initial !important"
-  >
-    <div class="modal-content">
-      <div class="modal-header">
-        <button
-          type="button"
-          class="close pull-right"
-          aria-label="Close"
-          (click)="idOptions.hide()"
-        >
+<div mdbModal #idOptions="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" [config]="{ backdrop: false, ignoreBackdropClick: true }" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="overflow-y: initial !important">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="idOptions.hide()">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title w-100" id="myModalLabel">සිසුවාගේ විස්තර </h4>
-      </div>
-
-      <div
-        class="modal-body"
-        style="height: 450px; overflow-y: auto"
-        *ngIf="user"
-      >
-        <div class="text-center">
-          <section class="text-center dark-grey-text scraper-details">
-            <div class="driver-raw">
-              <div class="col-md-1 text-center">
-                <img
-                  src={{user.profilePic}}
-                  class="profile-pic"
-                />
-              </div>
-              <div class="col-md-9 driver-name-details">
-
-                    <div class="driver-name-large">
-                      {{ user.studentName }}
-                    </div>
-                    <div class="small-info">
-                      සිසුවාගේ අංකය : {{  user.studentId }}
-                    </div>
-              </div>
-            </div>
-            <hr>
-            <br>
-            <div style="text-align:left;">
-
-            <div class="mt-2 mb-1 row">
-              <div class="col-md-4 ml-3">
-                <h6><b> කාඩ්පත් අංකය </b></h6>
-              </div>
-              <div class="col-md-6">
-                <span style="font-weight:bold;">{{user.cardId}}</span>
-              </div>
+                <h4 class="modal-title w-100" id="myModalLabel">සිසුවාගේ විස්තර </h4>
             </div>
 
-            <div class="mt-2 mb-1 row">
-              <div class="col-md-4 ml-3">
-                <h6><b> ජා. හැ. ප. අංකය  </b></h6>
-              </div>
-              <div class="col-md-6">
-                <span>{{user.Nic}}</span>
-              </div>
-            </div>
+            <div class="modal-body" style="height: 450px; overflow-y: auto" *ngIf="user">
+                <div class="text-center">
+                    <section class="text-center dark-grey-text scraper-details">
+                        <div class="driver-raw">
+                            <div class="col-md-1 text-center">
+                                <img src={{user.profilePic}} class="profile-pic" />
+                            </div>
+                            <div class="col-md-9 driver-name-details">
 
-            <div class="mt-2 mb-1 row">
-              <div class="col-md-4 ml-3">
-                <h6><b> විද්‍යුත් තැපැල් ලිපිනය  </b></h6>
-              </div>
-              <div class="col-md-6">
-                <span>{{user.email}}</span>
-              </div>
-            </div>
+                                <div class="driver-name-large">
+                                    {{ user.studentName }}
+                                </div>
+                                <div class="small-info">
+                                    සිසුවාගේ අංකය : {{ user.studentId }}
+                                </div>
+                            </div>
+
+                        </div>
+                        <button mdbBtn color="blue" text="white" class="btn btn-sm text-center" (click)=" edituser()">
+                           Edit
+                </button>
+                        <hr>
+                        <br>
+
+                        <div style="text-align:left;">
+                            <form style="color: #757575" (submit)="updateUserData(userForm)" #userForm="ngForm">
+                                <div class="mt-2 mb-1 row">
+                                    <div class="col-md-4 ml-3">
+                                        <h6><b> කාඩ්පත් අංකය </b></h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <input [readonly]=isedit matInput placeholder="CardNumber" [(ngModel)]="user.cardId" name="usercardid" ngModel>
+                                        </mat-form-field>
+
+                                    </div>
+                                </div>
+
+                                <div class="mt-2 mb-1 row">
+                                    <div class="col-md-4 ml-3">
+                                        <h6><b> ජා. හැ. ප. අංකය  </b></h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span>{{user.Nic}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-2 mb-1 row">
+                                    <div class="col-md-4 ml-3">
+                                        <h6><b> විද්‍යුත් තැපැල් ලිපිනය  </b></h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span>{{user.email}}</span>
+                                    </div>
+                                </div>
 
 
 
-            <div class="mt-2 mb-1 row">
-              <div class="col-md-4 ml-3">
-                <h6><b> දුරකථන අංකය   </b></h6>
-              </div>
-              <div class="col-md-6">
-                <span>{{user.contactNo}}</span>
-              </div>
-            </div>
+                                <div class="mt-2 mb-1 row">
+                                    <div class="col-md-4 ml-3">
+                                        <h6><b> දුරකථන අංකය   </b></h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <input [readonly]=isedit matInput placeholder="Enter Mobile Number" [(ngModel)]="user.contactNo" name="contatctNo" ngModel>
+                                        </mat-form-field>
+                                        <button *ngIf="!isedit" mdbBtn color="blue" text="white" class="btn btn-sm text-center" type="submit">Update</button>
 
-            <div class="mt-2 mb-1 row">
-              <div class="col-md-4 ml-3">
-                <h6><b> වත්මන් තත්වය   </b></h6>
-              </div>
-              <div class="col-md-6">
-                <span style="color:green; font-weight:bold;">{{user.status == "active" ? "සක්රීය සිසුවකු" : "අක්රීය සිසුවකු"}}</span>
-              </div>
-            </div>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="mt-2 mb-1 row">
+                                <div class="col-md-4 ml-3">
+                                    <h6><b> වත්මන් තත්වය   </b></h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <span style="color:green; font-weight:bold;">{{selectedstatus === "active" ? "සක්රීය සිසුවකු" : "අක්රීය සිසුවකු"}}</span>
+                                </div>
+                            </div>
 
-          </div><br>
-          <hr>
+                        </div><br>
+                        <hr>
 
 
-            <div class="scrapers-header mt-1 mb-3 text-center">
-                <h5> පංති ගාස්තු ගෙවීම් සටහන </h5>
-            </div>
+                        <div class="scrapers-header mt-1 mb-3 text-center" *ngIf="1==0">
+                            <h5> පංති ගාස්තු ගෙවීම් සටහන </h5>
+                        </div>
 
-            <div class="scrapers-list" *ngIf="payments && payments.length">
-              <div class="scraper-box" *ngFor="let pay of payments">
-                <div class="row">
-                  <div class="col-md-6 scraper-title">
-                    <div><strong>මාසය  {{pay.month}}</strong></div>
+                        <div class="scrapers-list" *ngIf="1==0">
+                            <div class="scraper-box" *ngFor="let pay of payments">
+                                <div class="row">
+                                    <div class="col-md-6 scraper-title">
+                                        <div><strong>මාසය  {{pay.month}}</strong></div>
 
-                  </div>
-                  <div class="col-md-6">
-                    <div><strong>ගෙවූ මුදල    {{pay.amount}}</strong></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div><strong>ගෙවූ මුදල    {{pay.amount}}</strong></div>
 
-                  </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-2 mb-3 text-center" *ngIf="!payments || !payments.length">
+                            <p> මෙම සිසුවා තවමත් පංති සදහා ගෙවීමක් සිදු කර නොමැත </p>
+                        </div>
+
+
+
+                        <hr />
+
+
+                    </section>
                 </div>
-              </div>
             </div>
 
-            <div class="mt-2 mb-3 text-center"  *ngIf="!payments || !payments.length">
-              <p> මෙම සිසුවා තවමත් පංති සදහා ගෙවීමක් සිදු කර නොමැත   </p>
-            </div>
+            <div class="modal-footer" *ngIf="user">
 
-
-
-            <hr />
-
-
-          </section>
-        </div>
-      </div>
-
-      <div class="modal-footer" *ngIf="user" >
-
-        <button
-          mdbBtn
-          color="red"
-          class="btn btn-md"
-          (click)="confirmDialog.show()"
-
-          mdbWavesEffect
-        >
-         {{user.status == "active" ? "අක්රීය කරන්න": "සක්රීය කරන්න"}}
+                <button mdbBtn color="red" class="btn btn-md" (click)="updateuserstatus(selectedstatus,user.studentId)" mdbWavesEffect>
+         {{selectedstatus == "active" ? "අක්රීය කරන්න": "සක්රීය කරන්න"}}
 
         </button>
 
-        <button
-          mdbBtn
-          color="dark"
-          outline="yes"
-          class="btn btn-md"
-          (click)="idOptions.hide()"
-          mdbWavesEffect
-        >
+                <button mdbBtn color="dark" outline="yes" class="btn btn-md" (click)="idOptions.hide()" mdbWavesEffect>
         ඉවත් වන්න
         </button>
-      </div>
-      <div
-        class="modal-body"
-        style="height: 450px; overflow-y: auto"
-        *ngIf="!user"
-      >
-        <app-not-found-page></app-not-found-page>
-      </div>
+            </div>
+            <div class="modal-body" style="height: 450px; overflow-y: auto" *ngIf="!user">
+                <app-not-found-page></app-not-found-page>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
@@ -326,6 +308,3 @@
         <!--/.Content-->
     </div>
 </div>
-
-
-

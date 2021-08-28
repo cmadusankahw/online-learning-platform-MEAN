@@ -3,13 +3,17 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/modules/auth/auth.service';
 import { Course, HeaderDetails, Student } from '../../../student.model';
 import { HttpClient } from '@angular/common/http';
+import {  url } from '../../..//student.config';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
+
 @Component({
   selector: 'app-dash-home',
   templateUrl: './dash-home.component.html',
   styleUrls: ['./dash-home.component.scss']
 })
 export class DashHomeComponent implements OnInit, OnDestroy {
-
+  mediaSub: Subscription;
+  deviceXs: boolean;
   checkstatuss = 'active';
   studentid = 'U1';
   teacherid = '123';
@@ -72,9 +76,13 @@ makepayemnt = 'No';
 
 
 
-  constructor(private authService: AuthService, public http: HttpClient) { }
+  constructor(private authService: AuthService, public http: HttpClient,public mediaObserver: MediaObserver) { }
 
   ngOnInit() {
+    this.mediaSub = this.mediaObserver.media$.subscribe((res: MediaChange) => {
+      console.log(res.mqAlias);
+      this.deviceXs = res.mqAlias === "xs" ? true : false;
+    })
    this.authService.getAuthStudent();
    this.userSub = this.authService.getCurrentStudentUpdatedListener()
      .subscribe((res: Student) => {
@@ -106,7 +114,7 @@ makepayemnt = 'No';
       console.log('here');
       const details = {teacherid: this.teacherid, class: '2023' };
       this.http
-    .post< any >('https://chemwin-backend.uc.r.appspot.com/learn-online/v1/course/getcourse', details)
+    .post< any >(url+'course/getcourse', details)
     .subscribe(responseData => {
       console.log(responseData);
       const datas = responseData;
