@@ -136,7 +136,7 @@ if(res ==='1'){
 
 updateuserstatus(status,studnetid){
   if(status==="active"){
-    status="deative";
+    status="deactive";
   }else{
     status="active";
   }

@@ -4,7 +4,7 @@
 <hr>
 <div class="mt-4" style="width:60%;">
     <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngFor="let class of courses">
+        <mat-expansion-panel *ngFor="let class of courses">
             <mat-expansion-panel-header>
                 <mat-panel-title class="mt-2 mb-2">
                     <h5 class="ml-4"><b> {{class.courseName}}</b></h5>

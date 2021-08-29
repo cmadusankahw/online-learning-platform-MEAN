@@ -14,7 +14,7 @@ import { MediaObserver, MediaChange } from '@angular/flex-layout';
 export class DashHomeComponent implements OnInit, OnDestroy {
   mediaSub: Subscription;
   deviceXs: boolean;
-  checkstatuss = 'active';
+  checkstatuss ='active';
   studentid = 'U1';
   teacherid = '123';
 
